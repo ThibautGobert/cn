@@ -25,7 +25,7 @@ const NavBar = ()=> {
                             <Link className={'nav-link '+ (url === 'modeles' ? 'active' : '')} href={route('modeles')}>Modèles</Link>
                         </li>
                     </ul>
-                    {!props.auth && (
+                    {!props.auth.user && (
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
                                 <Link className={'nav-link '+ (url === 'inscription' ? 'active' : '')} href={route('inscription')}>Inscription</Link>
@@ -35,7 +35,7 @@ const NavBar = ()=> {
                             </li>
                         </ul>
                     )}
-                    {props.auth && props.auth.user && (
+                    {props.auth.user && (
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
                                 <Link className={'nav-link '+ (url === 'inscription' ? 'active' : '')} method="post" href={route('logout')} as="button">{props.auth.user.full_name}</Link>

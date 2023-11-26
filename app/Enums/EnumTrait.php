@@ -18,15 +18,15 @@ trait EnumTrait
 
         foreach ($class->getConstants() as $key => $const) {
             $res[] = [
-                'ID' => $const->value,
-                'LIBELLE' => Description::getDescription(__CLASS__, $key)
+                'id' => $const->value,
+                'libelle' => Description::getDescription(__CLASS__, $key)
             ];
         }
 
         return collect($res);
     }
 
-    public static function getDescription(int $type): string
+    public static function getDescription(mixed $type): string
     {
         $class = new ReflectionClass(__CLASS__);
         foreach ($class->getConstants() as $key => $const) {

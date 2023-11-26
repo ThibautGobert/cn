@@ -2,8 +2,37 @@
 https://fonts.google.com/specimen/Raleway
  */
 
+
+
 $primary: #C7866A;
 $secondary: #B1C6BD;
+
+
+@import "@syncfusion/ej2-base/styles/bootstrap5.css";
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+@import "@syncfusion/ej2-buttons/styles/bootstrap5.css";
+@import "@syncfusion/ej2-inputs/styles/bootstrap5.css";
+@import "@syncfusion/ej2-navigations/styles/bootstrap5.css";
+@import '@syncfusion/ej2-popups/styles/bootstrap5.css';
+
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+/*
+    Rich text
+ */
+@import "@syncfusion/ej2-splitbuttons/styles/bootstrap5.css";
+@import "@syncfusion/ej2-lists/styles/bootstrap5.css";
+@import "@syncfusion/ej2-buttons/styles/bootstrap5.css";
+@import "@syncfusion/ej2-popups/styles/bootstrap5.css";
+
+
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+@import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
+
+
 @import 'bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,600;0,700;1,100;1,400&display=swap');
 html, body {

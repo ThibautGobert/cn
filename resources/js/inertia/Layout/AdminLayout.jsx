@@ -1,4 +1,5 @@
 import Menu from "../Components/Menu.jsx";
+import SideBar from "@/inertia/Components/Admin/SideBar.jsx";
 
 export default function AdminLayout({children}) {
     return (
@@ -6,6 +7,7 @@ export default function AdminLayout({children}) {
             Layout
             <hr/>
             <Menu></Menu>
+            <SideBar></SideBar>
             <div>{children}</div>
         </div>
     )

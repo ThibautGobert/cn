@@ -24,6 +24,7 @@ const Show = ()=> {
                 <div className="col-md-12 text-center">
                     <h2>S'inscrire</h2>
                     <p>Déjà membre ? <Link href={route('connexion')}>Connexion</Link></p>
+                    <Link href={route('auth.facebook')}>Connexion avec Facebook</Link>
                 </div>
             </div>
         </div>
