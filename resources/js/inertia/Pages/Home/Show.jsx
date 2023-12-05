@@ -1,9 +1,10 @@
 import AdminLayout from "../../Layout/AdminLayout.jsx";
 import DefaultLayout from '../../Layout/DefaultLayout.jsx'
 import {motion} from "framer-motion";
-import {Link} from "@inertiajs/react";
+import {Head, Link} from "@inertiajs/react";
 const Show = ()=> {
     return <>
+        <Head title="Accueil" />
         <div className="container">
             <div className="row">
                 <div className="col-md-12 text-center mt-5">

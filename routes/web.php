@@ -56,7 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::group(['prefix' => 'admin'], function() {
-        Route::get('dashboard', [DashboardController::class, 'show'])->name('admin.dashboard');
+        require_once __DIR__.'/concepts/admin/dashboard.php';
+        require_once __DIR__.'/concepts/admin/user.php';
+        require_once __DIR__.'/concepts/admin/role.php';
     });
 });
 

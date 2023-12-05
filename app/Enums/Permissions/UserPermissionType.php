@@ -10,17 +10,17 @@ enum UserPermissionType: string
     use EnumTrait;
 
      #[Description('Gestion des utilisateur')]
-     case MANAGE = 'manage user';
+     case MANAGE = 'gestion utilisateurs';
 
      #[Description('Consultation utilisateur')]
-     case SHOW = 'show user';
+     case SHOW = 'consulter utilisateur';
 
      #[Description('Création utilisateur')]
-     case CREATE = 'create user';
+     case CREATE = 'ajouter utilisateur';
 
      #[Description('Modification utilisateur')]
-     case UPDATE = 'update user';
+     case UPDATE = 'modifier utilisateur';
 
      #[Description('Suppression utilisateur')]
-     case DELETE = 'delete user';
+     case DELETE = 'supprimer utilisateur';
 }

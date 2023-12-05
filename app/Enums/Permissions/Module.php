@@ -10,6 +10,8 @@ enum Module: int
 {
     use EnumTrait;
 
+    #[Description('Administration')]
+    case ADMINISTRATION = 3;
     #[Description('Utilisateurs')]
     case USER = 1;
 
@@ -23,6 +25,8 @@ enum Module: int
                 return UserPermissionType::class;
             case Module::ROLE->value:
                 return RolePermissionType::class;
+            case Module::ADMINISTRATION->value:
+                return AdministrationPermissionType::class;
         }
     }
 }

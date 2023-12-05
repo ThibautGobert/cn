@@ -1,6 +1,6 @@
 import './bootstrap';
 import * as bootstrap from 'bootstrap'
-import '@fortawesome/fontawesome-free/css/all.min.css'
+
 //import 'bootstrap/dist/css/bootstrap.min.css'
 import '../scss/app.scss'
 import { createInertiaApp } from '@inertiajs/react'
@@ -23,6 +23,7 @@ createInertiaApp({
                 return resolvePageComponent(`./inertia/Pages/${pageName}.jsx`, import.meta.glob('./inertia/Pages/**/*.jsx'))
         }
     },
+    title: title => `${title} - CroquezNous`,
     setup({ el, App, props }) {
         const root = createRoot(el);
 

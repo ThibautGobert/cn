@@ -34,14 +34,17 @@ class HandleInertiaRequests extends Middleware
         $templateService = app(TemplateService::class);
         return [
             ...parent::share($request),
+            'csrf_token' => csrf_token(),
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user()?->append(['full_name', 'is_admin']),
             ],
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'sidebarItems' => $templateService::getSideBarItems()
+            'sidebarItems' => $templateService::getSideBarItems(config('template.sideBar.items')),
+            'frontSidebarItems' => $templateService::getSideBarItems(config('template.sideBarFront.items')),
+            'message' =>  fn () => $request->session()->get('message')
         ];
     }
 

@@ -3,7 +3,6 @@ import { usePage } from '@inertiajs/react'
 
 const NavBar = ()=> {
     const { url, component, props } = usePage()
-    console.log(props)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
@@ -31,14 +30,14 @@ const NavBar = ()=> {
                                 <Link className={'nav-link '+ (url === 'inscription' ? 'active' : '')} href={route('inscription')}>Inscription</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className={'nav-link '+ (url === 'connexion' ? 'active' : '')} href={route('connexion')}>Connexion</Link>
+                                <Link className={'nav-link '+ (url === 'connexion' ? 'active' : '')} href={route('login')}>Connexion</Link>
                             </li>
                         </ul>
                     )}
                     {props.auth.user && (
                         <ul className="navbar-nav ms-auto">
                             <li className="nav-item">
-                                <Link className={'nav-link '+ (url === 'inscription' ? 'active' : '')} method="post" href={route('logout')} as="button">{props.auth.user.full_name}</Link>
+                                <Link className={'nav-link '+ (url === 'inscription' ? 'active' : '')}  href={route('logout')} method="post"  as="button">{props.auth.user.full_name}</Link>
                             </li>
                         </ul>
                     )}

@@ -6,30 +6,33 @@ class TemplateService
 {
     public static function getSideBarItems($items = []) : array
     {
-        $user = auth()->user();
+        //$user = auth()->user();
         $url = app('request')->path();
-        if(!$user) return [];
-        $items = array_merge($items, config('template.sideBar.items'));
+        //if(!$user) return [];
         $result = [];
         foreach($items as $key => $item){
             $res = self::processItem($item, str_pad($key +1, 2, '0', STR_PAD_LEFT), $url);
             if(is_array($res))
                 $result[] = $res;
-            continue;
         }
         return $result;
     }
 
     protected static function processItem(array $item, string $index, string $url)
     {
-        $result = null;
+        if(isset($item['requireAuth']) && $item['requireAuth']) {
+            if(!auth()->user())return null;
+        }
+        if(isset($item['requireGuest']) && $item['requireGuest']) {
+            if(auth()->user())return null;
+        }
         if(!self::checkPermission($item)) return null;
         $result = $item;
         $result['nodeId'] = $index;
 
-        if (isset($item['navigateUrl']) &&  $url !=='/' && str_contains($item['navigateUrl'], $url)) {
+        if (isset($item['url']) &&  $url !=='/' && str_contains($item['url'], $url)) {
             $result['selected'] = true;
-        }elseif ($url !=='/' && !isset($item['navigateUrl']) && isset($item['conceptUrl']) && str_contains($url, $item['conceptUrl'])) {
+        }elseif ($url !=='/' && !isset($item['url']) && isset($item['conceptUrl']) && str_contains($url, $item['conceptUrl'])) {
             $result['expanded'] = true;
         }
 
@@ -54,7 +57,7 @@ class TemplateService
     {
         foreach ($nodeChilds as $node) {
             if($url !=='/' &&
-                (isset($node['navigateUrl']) && str_contains($node['navigateUrl'], $url)
+                (isset($node['url']) && str_contains($node['url'], $url)
                     || (isset($node['conceptUrl']) && str_contains($url, $node['conceptUrl'])))){
                 $result['expanded'] = true;
             }
@@ -71,11 +74,12 @@ class TemplateService
         if(!$permissions) return true;
 
         if(!is_countable($permissions)) {
-            return auth()->user()->can($permissions);
+            return auth()->user()?->can($permissions);
         }
-
         foreach ($permissions as $permission) {
-            if(auth()->user()->can($permissions)) return true;
+            if(auth()->user()?->hasPermissionTo($permission, 'web')) {
+                return true;
+            }
         }
 
         return false;
