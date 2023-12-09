@@ -6,18 +6,17 @@ const SideBar = forwardRef((props, ref)=> {
     let sidebarObj;
     const sidebarItems = usePage().props.sidebarItems
     const fields =  { dataSource: usePage().props.sidebarItems, id: 'nodeId', text: 'nodeText', child: 'nodeChild' }
+    let sideBarRef;
     const isMobile = ()=> {
         let userAgent = navigator.userAgent || navigator.vendor || window.opera;
         // Pour les appareils mobiles
         return /android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
     }
-    const [isActive, setIsActive] = useState(!isMobile());
 
     useEffect(()=> {
         if(isMobile()) {
             router.on('start', (event) => {
-                alert('test')
-                setIsActive(false)
+                sideBarRef.hide()
             })
         }
     }, [])
@@ -36,8 +35,7 @@ const SideBar = forwardRef((props, ref)=> {
 
     return <SidebarComponent
                 id="sidebar"
-                isOpen={isActive}
-                ref={ref}
+                ref={SideBar=> sideBarRef = SideBar}
                 width="250px"
                 created={onCreate}
                 enableGestures={isMobile()}
