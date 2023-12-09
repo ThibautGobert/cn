@@ -22,21 +22,25 @@ class FacebookController extends Controller
 
     public function handleFacebookCallback()
     {
-        $socialiteUser = Socialite::driver('facebook')->user();
+        try {
+            $socialiteUser = Socialite::driver('facebook')->user();
 
-        $user = User::where('email', $socialiteUser->getEmail())->first();
+            $user = User::where('email', $socialiteUser->getEmail())->first();
 
-        if (!$user) {
-            $exploded = explode(' ', $socialiteUser->getName());
-            $user = User::create([
-                'firstname' => $exploded[0] ?? null,
-                'lastname' => $exploded[1] ?? null,
-                'email' => $socialiteUser->getEmail(),
-            ]);
+            if (!$user) {
+                $exploded = explode(' ', $socialiteUser->getName());
+                $user = User::create([
+                    'firstname' => $exploded[0] ?? null,
+                    'lastname' => $exploded[1] ?? null,
+                    'email' => $socialiteUser->getEmail(),
+                ]);
+            }
+
+            // Connectez l'utilisateur
+            Auth::login($user);
+            return redirect('/')->withMessage(['type' => 'success', 'title' => 'Connexion réussie', 'content' => 'Heureux de vous revoir ' . auth()->user()->full_name]);
+        }catch (\Exception $e) {
+            return back()->withMessage(['type' => 'error', 'title' => 'Une erreur s\'est produite', 'content' => 'La connexion via Facebook n\'a pas fonctionné, veuillez réessayer plus tard']);
         }
-
-        // Connectez l'utilisateur
-        Auth::login($user);
-        return redirect(route('profile.edit')); // Rediriger vers la page souhaitée
     }
 }

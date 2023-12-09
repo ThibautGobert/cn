@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/');
+        return redirect()->intended('/')->withMessage(['type' => 'success', 'title' => 'Connexion réussie', 'content' => 'Heureux de vous revoir '. auth()->user()->full_name]);
     }
 
     /**
@@ -48,6 +48,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return to_route('home');//redirect('/');
+        return redirect('/')->withMessage(['type' => 'info', 'title' => 'Déconnexion réussie', 'content' => 'Vous êtes maintenant déconnecté, à bientôt !']);
     }
 }
