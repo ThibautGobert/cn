@@ -38,7 +38,6 @@ const SideBar = forwardRef((props, ref)=> {
                 isOpen={isActive}
                 ref={ref}
                 width="250px"
-                type={'Auto'}
                 created={onCreate}
                 enableGestures={isMobile()}
                 style={{ visibility: "hidden" }}
