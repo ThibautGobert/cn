@@ -12,11 +12,12 @@ const SideBar = forwardRef((props, ref)=> {
         // Pour les appareils mobiles
         return /android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
     }
+    const [isActive, setIsActive] = useState(!isMobile());
 
     useEffect(()=> {
         if(isMobile()) {
             router.on('start', (event) => {
-                sideBarRef.hide()
+                ref.current?.hide()
             })
         }
     }, [])
@@ -35,7 +36,8 @@ const SideBar = forwardRef((props, ref)=> {
 
     return <SidebarComponent
                 id="sidebar"
-                ref={SideBar=> sideBarRef = SideBar}
+                isOpen={isActive}
+                ref={ref}
                 width="250px"
                 created={onCreate}
                 enableGestures={isMobile()}
