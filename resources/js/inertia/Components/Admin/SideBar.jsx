@@ -35,6 +35,7 @@ const SideBar = forwardRef((props, ref)=> {
 
     return <SidebarComponent
                 id="sidebar"
+                isOpen={isActive}
                 ref={ref}
                 width="250px"
                 type={'Auto'}
