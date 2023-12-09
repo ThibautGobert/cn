@@ -16,6 +16,7 @@ const SideBar = forwardRef((props, ref)=> {
     useEffect(()=> {
         if(isMobile()) {
             router.on('start', (event) => {
+                alert('test')
                 setIsActive(false)
             })
         }
