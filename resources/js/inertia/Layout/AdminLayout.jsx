@@ -4,7 +4,7 @@ import {AppBarComponent, MenuComponent} from "@syncfusion/ej2-react-navigations"
 import { ButtonComponent } from '@syncfusion/ej2-react-buttons';
 import {useEffect, useRef} from "react";
 import {Link, usePage} from "@inertiajs/react";
-import {ToastComponent, ToastUtility} from '@syncfusion/ej2-react-notifications';
+import {motion} from "framer-motion";
 import useToastHook from "@/inertia/Hooks/useToastHook.js";
 
 export default function AdminLayout({children}) {
@@ -40,9 +40,13 @@ export default function AdminLayout({children}) {
             <Menu></Menu>
             <SideBar ref={sidebarRef}></SideBar>
             <div style={{paddingTop: '50px', zIndex: '0'}}>
-                <div className="container-fluid">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.7 }}
+                    className="container-fluid">
                     {children}
-                </div>
+                </motion.div>
             </div>
         </div>
     )

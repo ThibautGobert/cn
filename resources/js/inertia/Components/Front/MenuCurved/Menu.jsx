@@ -17,7 +17,7 @@ const Menu = ()=> {
             <motion.div
                 onClick={() => {setIsActive(!isActive)}}
                 className={'front-menu ' + (isActive ? ' active' : '')}
-                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
                 <div className={`burger ${isActive ? "active" : ""}`}></div>

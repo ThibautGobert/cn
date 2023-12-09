@@ -275,3 +275,7 @@ input:checked + .slider:before {
     }
 }
 
+
+.e-toast.e-toast-container {
+    z-index: 100000!important;
+}
