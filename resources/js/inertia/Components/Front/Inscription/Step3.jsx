@@ -1,8 +1,19 @@
 import {useForm} from "@inertiajs/react";
 import {useEffect, useState} from "react";
 import { MapContainer } from 'react-leaflet/MapContainer'
-import { TileLayer } from 'react-leaflet/TileLayer'
-import {Marker, Popup} from "react-leaflet";
+import L from 'leaflet';
+import {
+    TileLayer, Marker, Popup
+} from 'react-leaflet'
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const Step3 = ()=> {
     const { data, setData, transform, post, errors, processing, reset } = useForm({
