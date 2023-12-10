@@ -2,11 +2,11 @@
 https://fonts.google.com/specimen/Raleway
  */
 
-
-
 $primary: #C7866A;
 $secondary: #B1C6BD;
-
+$form-range-track-bg: $primary;
+$form-range-track-box-shadow: #B1C6BD;
+$form-range-thumb-bg: #B1C6BD;
 
 @import "@syncfusion/ej2-base/styles/bootstrap5.css";
 @import "@syncfusion/ej2-react-navigations/styles/bootstrap5.css";
@@ -32,7 +32,10 @@ $secondary: #B1C6BD;
 
 @import 'leaflet/dist/leaflet.css';
 
+
 @import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/variables";
+
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,600;0,700;1,100;1,400&display=swap');
 html, body, #app {
     font-family: 'Raleway', sans-serif;
@@ -279,4 +282,14 @@ input:checked + .slider:before {
 
 .e-toast.e-toast-container {
     z-index: 100000!important;
+}
+
+.progress-wrapper {
+    position: relative;
+    .distance-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }

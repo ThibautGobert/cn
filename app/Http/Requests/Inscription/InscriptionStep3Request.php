@@ -4,7 +4,7 @@ namespace App\Http\Requests\Inscription;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InscriptionStep2Request extends FormRequest
+class InscriptionStep3Request extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class InscriptionStep2Request extends FormRequest
     public function rules(): array
     {
         return [
-            'type_id' => 'required'
+            //
         ];
     }
 }

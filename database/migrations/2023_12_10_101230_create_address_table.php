@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name')->nullable();
             $table->tinyInteger('main')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->string('street')->nullable();
             $table->string('number')->nullable();
             $table->string('complement')->nullable();

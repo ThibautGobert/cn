@@ -6,6 +6,7 @@ import {Link, router, useForm, usePage} from '@inertiajs/react'
 import Step1 from "@/inertia/Components/Front/Inscription/Step1.jsx";
 import Step2 from "@/inertia/Components/Front/Inscription/Step2.jsx";
 import Step3 from "@/inertia/Components/Front/Inscription/Step3.jsx";
+import Step4 from "@/inertia/Components/Front/Inscription/Step4.jsx";
 export default function Show({auth}){
     //const [type, setType] = useState(null)
     /*
@@ -19,6 +20,7 @@ export default function Show({auth}){
 
      */
     const step = usePage().props.step
+
     const progress = ()=> {
         switch (step) {
             case 1:
@@ -65,6 +67,7 @@ export default function Show({auth}){
                                         {step === 1 &&<Step1></Step1>}
                                         {step === 2 &&<Step2></Step2>}
                                         {step === 3 &&<Step3></Step3>}
+                                        {step === 4 &&<Step4></Step4>}
                                     </div>
                                 </div>
                             </div>

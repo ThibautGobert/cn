@@ -15,6 +15,4 @@ class Address extends Model
     protected $table = 'address';
 
     protected $fillable = ['name', 'main', 'user_id', 'latitude', 'longitude', 'street', 'number', 'city', 'country_id', 'postal_code', 'complement'];
-
-
 }

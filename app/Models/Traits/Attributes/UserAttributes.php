@@ -33,7 +33,8 @@ trait UserAttributes
         return Attribute::make(
             get: function () {
                 if(!auth()->user()->type_id) return 2;
-                return 3;
+                if(auth()->user()->addresses->count() === 0)return 3;
+                return 4;
             }
         );
     }
