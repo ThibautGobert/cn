@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\UserType;
-use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\Traits\Attributes\UserAttributes;
+use App\Models\Traits\Relationships\UserRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, UserAttributes, UserRelationships;
 
     /**
      * The attributes that are mass assignable.
@@ -52,25 +51,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function fullName() : Attribute
-    {
-        return Attribute::make(
-            get: fn()=> $this->firstname .' '. $this->lastname
-        );
-    }
-
-    public function isAdmin(): Attribute
-    {
-        return Attribute::make(
-            get: fn()=> $this->hasRole('administrateur')
-        );
-    }
-
-    public function type() : Attribute
-    {
-        return Attribute::make(
-            get: fn()=> UserType::getDescription($this->type_id)
-        );
-    }
 }

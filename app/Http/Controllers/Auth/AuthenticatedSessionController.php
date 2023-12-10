@@ -34,6 +34,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if(!auth()->user()?->inscription_done) {
+            return redirect()->route('inscription')
+                ->withMessage(['type' => 'success', 'title' => 'Connexion réussie', 'content' => 'Heureux de vous revoir '. auth()->user()->full_name . '. Veuillez terminer votre inscription pour avoir accès à toutes les fonctionnalités de CroquezNous.']);
+        }
+
         return redirect()->intended('/')->withMessage(['type' => 'success', 'title' => 'Connexion réussie', 'content' => 'Heureux de vous revoir '. auth()->user()->full_name]);
     }
 

@@ -24,7 +24,6 @@ Route::group(['middleware' => 'inertia'], function () {
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/agence', [PageController::class, 'agence'])->name('agence');
     Route::get('/modeles', [PageController::class, 'modeles'])->name('modeles');
-    Route::get('/inscription', [PageController::class, 'inscription'])->name('inscription');
     Route::get('/connexion', [PageController::class, 'connexion'])->name('connexion');
 
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
@@ -32,6 +31,7 @@ Route::group(['middleware' => 'inertia'], function () {
 
 
     Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+    require_once __DIR__ . '/concepts/inscription.php';
 });
 /*
 Route::get('/', function () {

@@ -10,8 +10,6 @@
 * tarif_horaire
 * photo
 
-
-
 * locomotion
   * voiture
   * bus

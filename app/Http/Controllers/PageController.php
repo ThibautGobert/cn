@@ -25,10 +25,7 @@ class PageController extends Controller
         return Inertia::render('Modele/Show', []);
     }
 
-    public function inscription(Request $request)
-    {
-        return Inertia::render('Inscription/Show', []);
-    }
+
     public function connexion(Request $request)
     {
         return Inertia::render('Connexion/Show', []);
