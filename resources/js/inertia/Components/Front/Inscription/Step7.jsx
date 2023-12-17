@@ -1,6 +1,6 @@
 import {useForm, usePage} from "@inertiajs/react";
 import {useEffect} from "react";
-import * as confetti from 'canvas-confetti/src/confetti.js';
+import confetti from 'canvas-confetti';
 const Step7 = ()=> {
 
     const auth = usePage().props.auth
