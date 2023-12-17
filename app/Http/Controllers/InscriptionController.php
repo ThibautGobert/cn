@@ -112,7 +112,7 @@ class InscriptionController extends Controller
         if (Storage::disk('public')->exists($user->avatar)) {
             Storage::disk('public')->delete($user->avatar);
         }
-        $user->update(['avatar' => $path]);
+        $user->update(['avatar' => '/storage'.$path]);
 
         return redirect()->route('inscription');
     }

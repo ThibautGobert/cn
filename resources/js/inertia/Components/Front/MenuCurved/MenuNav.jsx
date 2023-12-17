@@ -38,7 +38,7 @@ const MenuNav = ()=> {
                             <div>
                                 <div className="d-flex align-items-center">
                                     <div className="me-3">
-                                        <img className="img-fluid rounded rounded-circle avatar-sm" src={'/storage'+auth.user.avatar} alt=""/>
+                                        <img className="img-fluid rounded rounded-circle avatar-sm" src={auth.user.avatar} alt=""/>
                                     </div>
                                     <div>
                                         <div>
