@@ -35,6 +35,7 @@ $form-range-thumb-bg: #B1C6BD;
 
 @import 'bootstrap/scss/bootstrap';
 @import "bootstrap/scss/variables";
+@import 'react-easy-crop/react-easy-crop.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,600;0,700;1,100;1,400&display=swap');
 html, body, #app {
@@ -238,6 +239,7 @@ input:checked + .slider:before {
                 border-bottom: 1px solid rgb(153, 153, 153);
                 text-transform: uppercase;
                 font-size: 11px;
+                padding-bottom: 15px;
                 margin-bottom: 40px;
             }
             a{
@@ -292,4 +294,56 @@ input:checked + .slider:before {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+.leaflet-popup {
+    top: -96px;
+}
+
+.reactEasyCrop_CropAreaGrid::before {
+    content: ' ';
+    box-sizing: border-box;
+    position: absolute;
+    border: 1px solid $secondary;
+    top: 0;
+    bottom: 0;
+    left: 33.33%;
+    right: 33.33%;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.reactEasyCrop_CropAreaGrid::after {
+    content: ' ';
+    box-sizing: border-box;
+    position: absolute;
+    border: 1px solid $secondary;
+    top: 33.33%;
+    bottom: 33.33%;
+    left: 0;
+    right: 0;
+    border-left: 0;
+    border-right: 0;
+}
+.profile-image-cropper {
+    .output {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        box-shadow: 0 0 32px rgba(0, 0, 0, 0.3);
+        border-radius: 999px;
+    }
+
+    .output img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: top left;
+    }
+}
+
+.avatar-sm {
+    width: 60px;
+    height: 60px;
 }

@@ -20,11 +20,13 @@ const SideBar = forwardRef((props, ref)=> {
                 ref.current?.hide()
             })
         }
+       // ref.current.refresh()
     }, [])
 
     function onCreate() {
        // console.log(ref.style)
         ref.current.element.style.visibility = '';
+        //ref.current.
     }
 
     function nodeTemplate(data) {
@@ -36,7 +38,7 @@ const SideBar = forwardRef((props, ref)=> {
 
     return <SidebarComponent
                 id="sidebar"
-                isOpen={isActive}
+                isOpen={!isMobile()}
                 ref={ref}
                 width="250px"
                 created={onCreate}

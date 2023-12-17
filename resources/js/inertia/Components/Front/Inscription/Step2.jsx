@@ -2,6 +2,7 @@ import {motion} from "framer-motion";
 import {useState} from "react";
 import * as UserType from '../../../../enums/UserType.js'
 import {useForm} from "@inertiajs/react";
+import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 const Step2 = ()=> {
     const [type, setType] = useState(null)
     const { data, setData, post, errors, processing, reset } = useForm({
@@ -38,7 +39,7 @@ const Step2 = ()=> {
                          <span>
                             {data.type_id === UserType.ARTISTE && <i className="fa fa-check text-success me-2"></i>}
                          </span>
-                        Je suis artiste
+                        Je suis artiste / croqueur
                     </motion.div>
                 </div>
                 <div className="col-lg-4 col-md-12 d-grid my-2">
@@ -60,8 +61,7 @@ const Step2 = ()=> {
                     <div className="row">
                         <div className="col-md-12 text-center">
                             <div className="mb-2 text-center">
-                                <button type="submit" disabled={!data.type_id} className="btn btn-lg btn-primary"><span
-                                    className="fa fa-check me-2"></span>Suivant</button>
+                                <SubmitBtn processing={processing} disabled={!data.type_id}></SubmitBtn>
                             </div>
                         </div>
                     </div>

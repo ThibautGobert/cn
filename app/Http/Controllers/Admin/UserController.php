@@ -39,7 +39,7 @@ class UserController extends Controller
         ", [
             UserType::AUCUN->value, UserType::getDescription(UserType::AUCUN->value),
             UserType::MODELE->value, UserType::getDescription(UserType::MODELE->value),
-            UserType::ARTISTE->value, UserType::getDescription(UserType::ARTISTE->value),
+            UserType::CROQUEUR->value, UserType::getDescription(UserType::CROQUEUR->value),
             UserType::ATELIER->value, UserType::getDescription(UserType::ATELIER->value),
         ]);
 

@@ -26,7 +26,10 @@ class User extends Authenticatable
         'email',
         'birthday',
         'password',
-        'type_id'
+        'type_id',
+        'distance_max',
+        'avatar',
+        'genre_type_id'
     ];
 
     protected $appends = [

@@ -1,6 +1,7 @@
 import DefaultLayout from "@/inertia/Layout/DefaultLayout.jsx";
 import {motion} from "framer-motion";
 import {Link, useForm} from "@inertiajs/react";
+import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 
 
 const Login = ()=> {
@@ -43,8 +44,7 @@ const Login = ()=> {
                                                    onChange={(e) => setData('password', e.target.value)} />
                                         </div>
                                         <div className="mb-2 text-center">
-                                            <button className="btn btn-lg btn-primary"><span
-                                                className="fa fa-check me-2"></span>Connexion</button>
+                                            <SubmitBtn label="Connexion" processing={processing} disabled={!data.email || !data.password}></SubmitBtn>
                                         </div>
                                     </form>
                                     <hr/>

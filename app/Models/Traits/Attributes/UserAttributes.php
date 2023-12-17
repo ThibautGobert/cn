@@ -34,7 +34,10 @@ trait UserAttributes
             get: function () {
                 if(!auth()->user()->type_id) return 2;
                 if(auth()->user()->addresses->count() === 0)return 3;
-                return 4;
+                if(auth()->user()->type_id === UserType::MODELE->value && !auth()->user()->distance_max) return 4;
+                if(auth()->user()->poses->count() === 0) return 5;
+                if(!auth()->user()->avatar || auth()->user()->avatar === '/images/default.png') return 6;
+                return 7;
             }
         );
     }
@@ -42,7 +45,7 @@ trait UserAttributes
     public function inscriptionDone(): Attribute
     {
         return Attribute::make(
-            get: fn()=> $this->inscription_step === 3
+            get: fn()=> $this->inscription_step === 7
         );
     }
 }

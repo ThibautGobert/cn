@@ -7,6 +7,9 @@ import Step1 from "@/inertia/Components/Front/Inscription/Step1.jsx";
 import Step2 from "@/inertia/Components/Front/Inscription/Step2.jsx";
 import Step3 from "@/inertia/Components/Front/Inscription/Step3.jsx";
 import Step4 from "@/inertia/Components/Front/Inscription/Step4.jsx";
+import Step5 from "@/inertia/Components/Front/Inscription/Step5.jsx";
+import Step6 from "@/inertia/Components/Front/Inscription/Step6.jsx";
+import Step7 from "@/inertia/Components/Front/Inscription/Step7.jsx";
 export default function Show({auth}){
     //const [type, setType] = useState(null)
     /*
@@ -22,15 +25,7 @@ export default function Show({auth}){
     const step = usePage().props.step
 
     const progress = ()=> {
-        switch (step) {
-            case 1:
-                return '0%'
-            case 2:
-                return '33%'
-            case 3:
-                return '66%'
-            default: return '100%'
-        }
+        return ((step-1)/6*100) +'%'
     }
 
     return(
@@ -63,11 +58,14 @@ export default function Show({auth}){
                                             </div>
                                         </div>
                                     </div>
-                                    <div className=" mt-3">
+                                    <div className="mt-3">
                                         {step === 1 &&<Step1></Step1>}
                                         {step === 2 &&<Step2></Step2>}
                                         {step === 3 &&<Step3></Step3>}
                                         {step === 4 &&<Step4></Step4>}
+                                        {step === 5 &&<Step5></Step5>}
+                                        {step === 6 &&<Step6></Step6>}
+                                        {step === 7 &&<Step7></Step7>}
                                     </div>
                                 </div>
                             </div>

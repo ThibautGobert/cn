@@ -10,7 +10,7 @@ enum UserType: int
     case AUCUN = 0;
     #[Description('Modèle d\'art')]
     case MODELE = 1;
-    #[Description('Croqueur')]
+    #[Description('Artiste / Croqueur')]
     case CROQUEUR = 2;
     #[Description('Atelier')]
     case ATELIER = 3;

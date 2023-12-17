@@ -4,7 +4,7 @@ namespace App\Http\Requests\Inscription;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class InscriptionStep3Request extends FormRequest
+class InscriptionStep5Request extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,14 @@ class InscriptionStep3Request extends FormRequest
     public function rules(): array
     {
         return [
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'street' => 'required',
-            'number' => 'required',
-            'city' => 'required',
-            'postal_code' => 'required',
+            'poses' => 'required|array|min:1'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'poses.*' => 'Veuillez sélectionner au moins un type de poses.'
         ];
     }
 }

@@ -7,6 +7,7 @@ import {
 } from 'react-leaflet'
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -53,7 +54,6 @@ const Step3 = ()=> {
                 });
             } else {
                 setLocalisationAccepted(false)
-                console.log("La géolocalisation n'est pas disponible");
                 reject("La géolocalisation n'est pas disponible");
             }
         });
@@ -86,8 +86,6 @@ const Step3 = ()=> {
         const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
         try {
             let res = await axios.get(url);
-            console.log(address)
-            console.log(res)
             if (res.data && res.data.length > 0) {
                 const { lat, lon } = res.data[0];
                 return { latitude: lat, longitude: lon };
@@ -118,6 +116,10 @@ const Step3 = ()=> {
 
     const fullAddress = ()=> {
         return data.number + ' ' + data.street + ', ' + data.postal_code + ', ' + data.city + ', ' + data.country_code
+    }
+
+    const addressFilled = ()=> {
+        return data.number && data.street && data.postal_code && data.city && data.country_code
     }
 
     const submit = async (e)=> {
@@ -156,43 +158,49 @@ const Step3 = ()=> {
                     </div>
                 </div>
             </div>}
-            {!localisationAccepted || hasAddress() && <div className="row mt-3">
-                <div className="col-lg-4 col-md-8 mb-3">
-                    <label htmlFor="city">Rue</label>
-                    <input type="text" className="form-control form-control-lg" name="city" id="city"
-                           onChange={(e)=> setData('street', e.target.value)}
-                           value={data.street}
-                    />
+            {(!localisationAccepted || hasAddress()) &&
+                <div className="row mt-3">
+                    <div className="col-lg-4 col-md-8 mb-3">
+                        <label htmlFor="city">Rue</label>
+                        <input type="text" className="form-control form-control-lg" name="city" id="city"
+                               onChange={(e)=> setData('street', e.target.value)}
+                               value={data.street}
+                        />
+                        {errors.street && <div className="invalid-feedback">{errors.street}</div>}
+                    </div>
+                    <div className="col-lg-2 col-md-4 mb-3">
+                        <label htmlFor="number">Numéro</label>
+                        <input type="text" className="form-control form-control-lg" name="number" id="number"
+                               onChange={(e)=> setData('number', e.target.value)}
+                               value={data.number}
+                        />
+                        {errors.number && <div className="invalid-feedback">{errors.number}</div>}
+                    </div>
+                    <div className="col-lg-6 mb-3">
+                        <label htmlFor="city">Complément</label>
+                        <input type="text" className="form-control form-control-lg" name="city" id="city"
+                               onChange={(e)=> setData('complement', e.target.value)}
+                               value={data.complement}
+                        />
+                    </div>
+                    <div className="col-lg-6 mb-3">
+                        <label htmlFor="city">Ville</label>
+                        <input type="text" className="form-control form-control-lg" name="city" id="city"
+                               onChange={(e)=> setData('city', e.target.value)}
+                               value={data.city}
+                        />
+                        {errors.city && <div className="invalid-feedback">{errors.city}</div>}
+                    </div>
+                    <div className="col-lg-2 col-md-4 mb-3">
+                        <label htmlFor="city">Code postal</label>
+                        <input type="text" className="form-control form-control-lg" name="city" id="city"
+                               onChange={(e)=> setData('postal_code', e.target.value)}
+                               value={data.postal_code}
+                        />
+                        {errors.postal_code && <div className="invalid-feedback">{errors.postal_code}</div>}
+                    </div>
                 </div>
-                <div className="col-lg-2 col-md-4 mb-3">
-                    <label htmlFor="number">Numéro</label>
-                    <input type="text" className="form-control form-control-lg" name="number" id="number"
-                           onChange={(e)=> setData('number', e.target.value)}
-                           value={data.number}
-                    />
-                </div>
-                <div className="col-lg-6 mb-3">
-                    <label htmlFor="city">Complément</label>
-                    <input type="text" className="form-control form-control-lg" name="city" id="city"
-                           onChange={(e)=> setData('complement', e.target.value)}
-                           value={data.complement}
-                    />
-                </div>
-                <div className="col-lg-6 mb-3">
-                    <label htmlFor="city">Ville</label>
-                    <input type="text" className="form-control form-control-lg" name="city" id="city"
-                           onChange={(e)=> setData('city', e.target.value)}
-                           value={data.city}
-                    />
-                </div>
-                <div className="col-lg-2 col-md-4 mb-3">
-                    <label htmlFor="city">Code postal</label>
-                    <input type="text" className="form-control form-control-lg" name="city" id="city"
-                           onChange={(e)=> setData('postal_code', e.target.value)}
-                           value={data.postal_code}
-                    />
-                </div>
-            </div>}
+            }
             <div className="row mt-3">
                 <div className="col-md-12">
                     {data.latitude && data.longitude && <div style={{height: '400px'}}>
@@ -215,8 +223,7 @@ const Step3 = ()=> {
                     <div className="row">
                         <div className="col-md-12 text-center">
                             <div className="mb-2 text-center">
-                                <button type="submit" disabled={false} className="btn btn-lg btn-primary"><span
-                                    className="fa fa-check me-2"></span>Suivant</button>
+                                <SubmitBtn processing={processing} disabled={!addressFilled()}></SubmitBtn>
                             </div>
                         </div>
                     </div>

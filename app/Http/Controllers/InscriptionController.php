@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CountryType;
+use App\Enums\PoseType;
 use App\Http\Requests\Inscription\InscriptionStep1Request;
 use App\Http\Requests\Inscription\InscriptionStep2Request;
 use App\Http\Requests\Inscription\InscriptionStep3Request;
+use App\Http\Requests\Inscription\InscriptionStep4Request;
+use App\Http\Requests\Inscription\InscriptionStep5Request;
 use App\Models\Address;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class InscriptionController extends Controller
 {
@@ -20,7 +28,8 @@ class InscriptionController extends Controller
     {
         return Inertia::render('Inscription/Show', [
             'step' => $this->getStep(),
-            'address' => auth()->user()?->mainAddress
+            'address' => auth()->user()?->mainAddress,
+            'poseType' => PoseType::getAll()
         ]);
     }
 
@@ -69,4 +78,43 @@ class InscriptionController extends Controller
         ]);
         return redirect()->route('inscription');
     }
+
+    public function step4(InscriptionStep4Request $request, User $user)
+    {
+        $user->update(['distance_max' => $request->input('distance_max')]);
+        return redirect()->route('inscription');
+    }
+
+    public function step5(InscriptionStep5Request $request, User $user)
+    {
+        $user->poses()->createMany(array_map(fn($poseId)=> ['pose_type_id' => $poseId], $request->input('poses')));
+        return redirect()->route('inscription');
+    }
+
+    public function step6(Request $request, User $user)
+    {
+        $croppedAreaPixel = $request->input('croppedAreaPixel');
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($request->input('image'));
+
+        $image->crop(
+            $croppedAreaPixel['width'],
+            $croppedAreaPixel['height'],
+            $croppedAreaPixel['x'],
+            $croppedAreaPixel['y']
+        );
+
+        $image->resize(300, 300);
+        $image = $image->toJpeg(100);
+        $path = '/image/' . $user->id . '/avatar/' . Str::random(40) . '.jpg';
+        Storage::disk('public')->put($path, $image);
+
+        if (Storage::disk('public')->exists($user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+        $user->update(['avatar' => $path]);
+
+        return redirect()->route('inscription');
+    }
+
 }

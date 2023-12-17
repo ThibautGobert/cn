@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {Link, useForm} from "@inertiajs/react";
+import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 
 const Step1 = ()=> {
     const { data, setData, post, errors, processing, reset } = useForm({
@@ -73,8 +74,7 @@ const Step1 = ()=> {
             <div className="row">
                 <div className="col-md-12 text-center">
                     <div className="mb-2 text-center">
-                        <button className="btn btn-lg btn-primary"><span
-                            className="fa fa-check me-2"></span>Enregistrer</button>
+                        <SubmitBtn processing={processing}></SubmitBtn>
                     </div>
                 </div>
             </div>

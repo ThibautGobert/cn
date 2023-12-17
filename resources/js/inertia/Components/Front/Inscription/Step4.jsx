@@ -7,6 +7,7 @@ import {
 } from 'react-leaflet'
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -19,30 +20,26 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 
 const Step4 = ()=> {
-    const { data, setData, transform, post, errors, processing, reset } = useForm({
-        distance_max: 5,
-    });
     const address = usePage().props.address
+    const auth = usePage().props.auth
+    const { data, setData, transform, post, errors, processing, reset } = useForm({
+        distance_max: auth.user?.distance_max || 5,
+    });
+
     const fullAddress = ()=> {
         return address.number + ' ' + address.street + ', ' + address.postal_code + ', ' + address.city
     }
     const submit = async (e)=> {
         e.preventDefault()
-        let address = data.number + ' ' + data.street + ', ' + data.city
-        let {latitude, longitude} = geocodeAddress(address)
-        await setData(data=> ({
-            ...data,
-            'latitude': latitude,
-            'longitude': longitude,
-        }))
-        await post('/inscription/step3')
+
+        await post('/inscription/step4/'+auth.user.id)
     }
-    const fillBlueOptions = { fillColor: 'blue' }
+    const fillBlueOptions = { fillColor: '#C7866A', color: '#C7866A' }
     return <>
         <form onSubmit={submit}>
             <div className="row mt-3">
-                <div className="col-md-12">
-                    <label htmlFor="distance_max">Quelle est la distance maximum à laquelle vous pouvez vous déplacer ?</label>
+                <div className="col-md-12 text-center">
+                    Quelle est la distance maximum à laquelle vous pouvez vous déplacer ?
                     <div className="progress-wrapper">
                         <div className="badge bg-secondary distance-indicator">{data.distance_max}Km</div>
                         <input min="5" max="350" type="range" className="form-range " value={data.distance_max} onChange={(e)=> setData('distance_max', e.target.value)}/>
@@ -52,7 +49,7 @@ const Step4 = ()=> {
             <div className="row mt-3">
                 <div className="col-md-12">
                     {address.latitude && address.longitude && <div style={{height: '400px'}}>
-                        <MapContainer style={{height: '100%'}} center={[address.latitude, address.longitude]} zoom={9} scrollWheelZoom={true}>
+                        <MapContainer style={{height: '100%'}} center={[address.latitude, address.longitude]} zoom={8} scrollWheelZoom={true}>
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -72,8 +69,7 @@ const Step4 = ()=> {
                     <div className="row">
                         <div className="col-md-12 text-center">
                             <div className="mb-2 text-center">
-                                <button type="submit" disabled={false} className="btn btn-lg btn-primary"><span
-                                    className="fa fa-check me-2"></span>Suivant</button>
+                               <SubmitBtn processing={processing}></SubmitBtn>
                             </div>
                         </div>
                     </div>

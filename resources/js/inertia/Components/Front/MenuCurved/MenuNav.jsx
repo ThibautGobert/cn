@@ -34,19 +34,28 @@ const MenuNav = ()=> {
                 {/*onMouseLeave = {() => {setSelectedIndicator(pathname)}}*/}
                 <div  className="nav">
                     <div className="header">
-                        {auth.user && (
+                        {auth.user ? (
                             <div>
-                                <div>{auth.user.full_name}</div>
-                                <p>
-                                    <Link className="text-danger" href={route('logout')} >Se déconnecter</Link>
-                                </p>
+                                <div className="d-flex align-items-center">
+                                    <div className="me-3">
+                                        <img className="img-fluid rounded rounded-circle avatar-sm" src={'/storage'+auth.user.avatar} alt=""/>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            {auth.user.full_name}
+                                        </div>
+
+                                        <Link className="text-danger" href={route('logout')} >Se déconnecter</Link>
+                                    </div>
+
+                                </div>
                             </div>
-                        )}
-                        {!auth.user && (
+                        ):
                             <div>
                                 <Link href={route('login')}></Link>
                             </div>
-                        )}
+                        }
+
                     </div>
                     {
                         frontSidebarItems.map( (data, index) => {
