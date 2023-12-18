@@ -8,6 +8,7 @@ import {
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
+import {motion} from "framer-motion";
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -31,6 +32,7 @@ const Step3 = ()=> {
         complement: '',
     });
     const [localisationAccepted, setLocalisationAccepted] = useState(true)
+    const [searching, setSearching] = useState(false)
     const getPosition = () => {
         return new Promise((resolve, reject) => {
             if ("geolocation" in navigator) {
@@ -49,7 +51,7 @@ const Step3 = ()=> {
                     reject(error);
                 }, {
                     enableHighAccuracy: true,
-                    timeout: 10000,
+                    timeout: 500,
                     maximumAge: 0
                 });
             } else {
@@ -62,7 +64,6 @@ const Step3 = ()=> {
     const getAdresseFromPosition = async () => {
         if(!data.latitude || !data.longitude) return
         const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${data.latitude}&lon=${data.longitude}`;
-
         try {
             let res = await axios.get(url);
 
@@ -107,11 +108,9 @@ const Step3 = ()=> {
 
     const handleLocationRequest = async (e) => {
         e.preventDefault()
-        try {
-            await getPosition();
-        } catch (error) {
-            console.error(error);
-        }
+        setSearching(true)
+        await getPosition();
+        setSearching(false)
     };
 
     const fullAddress = ()=> {
@@ -142,7 +141,22 @@ const Step3 = ()=> {
                     <small className="text-danger">Il semble que votre navigateur ne permet pas d'obtenir votre position ou que vous avez refusé l'autorisation. <br/>Vous pouvez donner l'autorisation au navigateur en cliquant sur l'icône qui se trouve à droite de la barre d'adresse et ensuite cliquer sur commencer, ou alors ne pas donner l'autorisation et introduire votre adresse manuellement.</small>
                 </div>}
                 <div className="mt-3">
-                    <button onClick={handleLocationRequest} className="btn btn-lg btn-secondary">Commencer</button>
+                    <button onClick={handleLocationRequest} className="btn btn-lg btn-secondary">
+                        {!searching ?<motion.i
+                                className="fa-solid fa-map-location-dot me-2"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: processing ? 0 : 1 }}
+                                transition={{ duration: 0.5 }} // Durée du fondu en secondes
+                            ></motion.i>
+                        : <motion.i
+                                className="fa-solid fa-fan fa-spin me-2"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: processing ? 1 : 0 }}
+                                transition={{ duration: 0.5 }} // Durée du fondu en secondes
+                            ></motion.i>
+                        }
+                        Commencer
+                    </button>
                 </div>
             </div>
             {hasAddress() && <div className="row mt-3">

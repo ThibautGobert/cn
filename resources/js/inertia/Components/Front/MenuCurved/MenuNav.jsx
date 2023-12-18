@@ -80,7 +80,7 @@ const MenuNav = ()=> {
                     }
                 </div>
                 <div className="footer">
-                   
+
                 </div>
             </div>
             <Curve />
