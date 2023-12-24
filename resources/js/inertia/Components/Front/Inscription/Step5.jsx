@@ -26,7 +26,7 @@ const Step5 = ()=> {
 
     const Poses = poseType.map(p=> {
         return <>
-            <div className="col-md-2 mb-2 text-center" key={'pose_'+p.id}>
+            <div className="ol-lg-2 col-md-4 col-6  mb-2 text-center" key={'pose_'+p.id}>
                 <label className={'form-label d-block'}>{p.libelle}</label>
                 <label htmlFor={'pose_' + p.id} className="switch">
                     <input type="checkbox"

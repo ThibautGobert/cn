@@ -28,7 +28,7 @@ class InscriptionController extends Controller
     {
         return Inertia::render('Inscription/Show', [
             'step' => $this->getStep(),
-            'address' => auth()->user()?->mainAddress,
+            'address' => auth()->user()?->main_address,
             'poseType' => PoseType::getAll()
         ]);
     }

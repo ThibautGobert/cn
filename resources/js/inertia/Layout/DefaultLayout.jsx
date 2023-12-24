@@ -16,7 +16,7 @@ const DefaultLayout = ({auth, children})=> {
             className="min-vh-100 d-flex flex-column">
             <Menu></Menu>
             {/*<NavBar auth={auth}></NavBar>*/}
-            <div className="flex-grow-1 flex-column d-flex">
+            <div className="flex-grow-1 flex-column d-flex" style={{marginTop: '75px'}}>
                 {children}
             </div>
         </motion.div>

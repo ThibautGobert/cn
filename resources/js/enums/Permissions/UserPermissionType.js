@@ -1,0 +1,5 @@
+export const MANAGE = "gestion utilisateurs"
+export const SHOW = "consulter utilisateur"
+export const CREATE = "ajouter utilisateur"
+export const UPDATE = "modifier utilisateur"
+export const DELETE = "supprimer utilisateur"

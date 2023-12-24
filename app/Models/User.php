@@ -29,10 +29,12 @@ class User extends Authenticatable
         'type_id',
         'distance_max',
         'avatar',
-        'genre_type_id'
+        'genre_type_id',
+        'about'
     ];
 
     protected $appends = [
+        'full_name'
     ];
 
     /**

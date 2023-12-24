@@ -31,7 +31,8 @@ Route::group(['middleware' => 'inertia'], function () {
 
 
     Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
-    require_once __DIR__ . '/concepts/inscription.php';
+    require_once __DIR__ . '/concepts/front/inscription.php';
+    require_once __DIR__ . '/concepts/front/profile.php';
 });
 /*
 Route::get('/', function () {
@@ -51,9 +52,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 */
 Route::middleware('auth')->group(function () {
+    /*
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    */
 
     Route::group(['prefix' => 'admin', 'middleware' => ['access.admin']], function() {
         require_once __DIR__.'/concepts/admin/dashboard.php';

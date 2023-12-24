@@ -32,6 +32,38 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $templateService = app(TemplateService::class);
+        $sideBarFront = [
+            [
+                'nodeText' => 'Accueil',
+                'url' =>  '/',
+            ],
+            [
+                'nodeText' => 'Administration',
+                'url' =>  '/admin/dashboard',
+                'requireAuth' => true,
+                'permissions' => \App\Enums\Permissions\AdministrationPermissionType::MANAGE->value
+            ],
+            [
+                'nodeText' => 'Profil',
+                'url' =>  '/profile/'.auth()->user()?->id.'/show',
+                'requireAuth' => true,
+            ],
+            [
+                'nodeText' => 'Connexion',
+                'url' =>  'login',
+                'requireGuest' => true,
+            ],
+            [
+                'nodeText' => 'Inscription',
+                'url' =>  'inscription',
+                'requireGuest' => true,
+            ],
+            [
+                'nodeText' => 'Agence',
+                'url' =>  '/agence',
+            ],
+        ];
+
         return [
             ...parent::share($request),
             'csrf_token' => csrf_token(),
@@ -43,7 +75,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'sidebarItems' => $templateService::getSideBarItems(config('template.sideBar.items')),
-            'frontSidebarItems' => $templateService::getSideBarItems(config('template.sideBarFront.items')),
+            'frontSidebarItems' => $templateService::getSideBarItems($sideBarFront),
             'message' =>  fn () => $request->session()->get('message')
         ];
     }

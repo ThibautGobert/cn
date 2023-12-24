@@ -27,6 +27,7 @@ $form-range-thumb-bg: #B1C6BD;
 @import "@syncfusion/ej2-react-dropdowns/styles/bootstrap5.css";
 @import "@syncfusion/ej2-react-buttons/styles/bootstrap5.css";
 @import "@syncfusion/ej2-react-notifications/styles/bootstrap5.css";
+@import "@syncfusion/ej2-inputs/styles/bootstrap5.css";
 
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -38,10 +39,19 @@ $form-range-thumb-bg: #B1C6BD;
 @import 'react-easy-crop/react-easy-crop.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,600;0,700;1,100;1,400&display=swap');
+/**
+Suppression du warning syncfusion
+ */
+#app + div:not([class]):not([id]) {
+    display: none;
+}
 html, body, #app {
     font-family: 'Raleway', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: unset;
 }
 a {
     text-decoration: none;
@@ -54,6 +64,12 @@ a {
 .btn.xl {
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.edit-link {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 30px;
 }
 
 .e-appbar.e-primary {
@@ -343,8 +359,22 @@ input:checked + .slider:before {
 }
 
 .avatar-sm {
-    width: 60px;
-    height: 60px;
+    max-width: 100%;
+    height: auto;
+    max-height: 60px;
+}
+.avatar-md {
+    max-width: 100%;
+    height: auto;
+    max-height: 120px;
+}
+.avatar-lg {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    @media(max-width: 768px) {
+        max-height: 150px;
+    }
 }
 
 .ReactModalPortal > div {
@@ -371,40 +401,34 @@ input:checked + .slider:before {
     padding: 0!important;
     border: none!important;
     width: 450px;
-}
-/*
-.ReactModal__Content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    margin-right: -50%;
-    bottom: auto;
-    transform: translate(-50%, -50%);
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 }
 
- */
-
-/*
-.Modal {
-    z-index: 1000;
-    position: absolute;
-    top: 40px;
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
-    background-color: papayawhip;
+.e-rating-container .e-rating-item-list {
+    margin: 0;
 }
-
-.Overlay {
-    z-index: 1001;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+.e-rating-container.custom-fill .e-rating-item-list:hover .e-rating-item-container .e-rating-icon,
+.e-rating-container.custom-fill .e-rating-item-container .e-rating-icon,
+.e-rating-container.custom-fill.e-disabled .e-rating-item-container .e-rating-icon,
+{
+    /* To change rated symbol fill color and un-rated symbol fill color */
+    background: linear-gradient(to right, #ffe814 var(--rating-value), #d8d7d4 var(--rating-value));
+    background-clip: text;
+    -webkit-background-clip: text;
 }
-
- */
-
+.e-dropdownbase .e-list-item.e-item-focus, .e-dropdownbase .e-list-item.e-active, .e-dropdownbase .e-list-item.e-active.e-hover, .e-dropdownbase .e-list-item.e-hover {
+    background-color: $secondary;
+    //color: #2319b8;
+}
+.e-ddl.e-input-group.e-control-wrapper {
+    &:active {
+        border-color: $primary!important;
+        box-shadow: 0 0 0 0.25rem rgba(199, 134, 106, 0.25)!important;;
+    }
+    &.e-input-focus {
+        border-color: $primary!important;
+        box-shadow: 0 0 0 0.25rem rgba(199, 134, 106, 0.25)!important;;
+    }
+}

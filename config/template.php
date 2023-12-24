@@ -59,37 +59,7 @@ return [
         ]
     ],
     'sideBarFront'=> [
-        'items' => [
-            [
-                'nodeText' => 'Accueil',
-                'url' =>  '/',
-            ],
-            [
-                'nodeText' => 'Administration',
-                'url' =>  '/admin/dashboard',
-                'requireAuth' => true,
-                'permissions' => \App\Enums\Permissions\AdministrationPermissionType::MANAGE->value
-            ],
-            [
-                'nodeText' => 'Profil',
-                'url' =>  '/profile',
-                'requireAuth' => true,
-            ],
-            [
-                'nodeText' => 'Connexion',
-                'url' =>  'login',
-                'requireGuest' => true,
-            ],
-            [
-                'nodeText' => 'Inscription',
-                'url' =>  'inscription',
-                'requireGuest' => true,
-            ],
-            [
-                'nodeText' => 'Agence',
-                'url' =>  '/agence',
-            ],
-        ]
+        'items' => [],
     ],
     'userMenu' => [
         'items' => [

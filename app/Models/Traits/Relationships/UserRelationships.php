@@ -16,7 +16,7 @@ trait UserRelationships
         return $this->hasMany(Address::class, 'user_id', 'id');
     }
 
-    public function mainAddress(): HasOne
+    public function main_address(): HasOne
     {
         return $this->hasOne(Address::class, 'user_id', 'id')->where('main', true);
     }

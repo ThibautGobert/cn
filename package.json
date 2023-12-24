@@ -26,6 +26,7 @@
         "@syncfusion/ej2-react-buttons": "^23.2.4",
         "@syncfusion/ej2-react-dropdowns": "^23.2.6",
         "@syncfusion/ej2-react-grids": "^23.2.4",
+        "@syncfusion/ej2-react-inputs": "^24.1.41",
         "@syncfusion/ej2-react-navigations": "^23.2.5",
         "@syncfusion/ej2-react-notifications": "^23.2.5",
         "@vitejs/plugin-react": "^4.1.1",

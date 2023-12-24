@@ -30,7 +30,6 @@ const Step6 = ()=> {
             <div className="row">
                 <div className="col-md-12 mb-3 text-center">
                     Veuillez choisir une image et l'adapter afin que le résultat vous convienne dans le cercle de prévisualisation. <br/>
-
                 </div>
             </div>
             <div className="row">
