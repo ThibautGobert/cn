@@ -33,7 +33,8 @@ const Grid = ()=> {
         return (
             <div>
                 <Link href={route('admin.user.edit', data.id)} className="btn btn-primary me-2"><i className="fa fa-edit"></i></Link>
-                <button onClick={(e)=>onClickDeleteButton(e, data)} className="btn btn-danger"><i className="fa fa-times"></i></button>
+                <Link href={route('profile.show', data.id)} className="btn btn-outline-info me-2"><i className="fa-regular fa-user"></i></Link>
+                <button onClick={(e)=>onClickDeleteButton(e, data)} className="btn btn-outline-danger"><i className="fa fa-times"></i></button>
             </div>
         )
     }
