@@ -42,7 +42,6 @@ html, body, #app {
     font-family: 'Raleway', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
-
 }
 a {
     text-decoration: none;
@@ -347,3 +346,65 @@ input:checked + .slider:before {
     width: 60px;
     height: 60px;
 }
+
+.ReactModalPortal > div {
+    opacity: 0;
+}
+.ReactModal__Body--open {
+    position: relative;
+    z-index: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    transition: opacity 200ms ease-in-out;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1001;
+    position: relative;
+    &--after-open {
+        opacity: 1;
+    }
+    &--before-close {
+        opacity: 0;
+    }
+}
+.ReactModal__Content {
+    padding: 0!important;
+    border: none!important;
+    width: 450px;
+}
+/*
+.ReactModal__Content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    margin-right: -50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+}
+
+ */
+
+/*
+.Modal {
+    z-index: 1000;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background-color: papayawhip;
+}
+
+.Overlay {
+    z-index: 1001;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+ */
+

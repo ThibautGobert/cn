@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::group(['prefix' => 'admin'], function() {
+    Route::group(['prefix' => 'admin', 'middleware' => ['access.admin']], function() {
         require_once __DIR__.'/concepts/admin/dashboard.php';
         require_once __DIR__.'/concepts/admin/user.php';
         require_once __DIR__.'/concepts/admin/role.php';

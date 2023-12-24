@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\Permissions\Module;
 use App\Enums\UserType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\Admin\User\UserCreateRequest;
+use App\Http\Requests\Admin\User\UserDeleteRequest;
+use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
 use App\Services\SyncfucionDataService;
 use Illuminate\Database\Query\JoinClause;
@@ -30,6 +31,7 @@ class UserController extends Controller
     {
         $users = DB::table('users')->selectRaw("
             users.id,
+            concat_ws('', users.firstname, users.lastname) as full_name,
             case
                 when users.type_id = ? then ?
                 when users.type_id = ? then ?
@@ -99,5 +101,11 @@ class UserController extends Controller
         $user->roles()->sync($request->input('roles'));
 
         return to_route('admin.user.index')->withMessage(['type' => 'success', 'content' => 'Utilisateur mis à jour avec succès !']);
+    }
+
+    public function destroy(UserDeleteRequest $request, User $user)
+    {
+        $user->delete();
+        return response()->json('ok');
     }
 }

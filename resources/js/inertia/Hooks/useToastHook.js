@@ -50,7 +50,7 @@ const useToastHook = ({message, errors})=> {
 
 
     useEffect(()=> {
-        if(Object.keys(errors).length !== 0) {
+        if(errors && Object.keys(errors).length !== 0) {
             let content = ''
             for (const [key, value] of Object.entries(errors)) {
                 content += ('- '+value+'<br>')
