@@ -17,29 +17,16 @@ const Show = ({user})=> {
                 <label className={'form-label d-block'}>{p.libelle}</label>
                 <label htmlFor={'pose_' + p.id} className="switch">
                     <input type="checkbox"
+                           disabled={true}
                            name="poses[]"
                            id={'pose_' + p.id}
                            checked={user.poses.find(up=> up.pose_type_id === p.id)}
-                           onChange={e=> handleCheckBox(e)}
                            value={p.id}/>
                     <span className="slider round"></span>
                 </label>
             </div>
         )
     })
-    function handleCheckBox(e) {
-        let id = e.target.value;
-        if (e.target.checked) {
-            setData("poses", [...data.poses, id]);
-        } else {
-            setData(
-                "poses",
-                data.poses.filter((item) => {
-                    return parseInt(item) !== parseInt(id);
-                })
-            );
-        }
-    }
 
     const  DisplayBreakLine = ({ text })=> {
         if(!text)return
