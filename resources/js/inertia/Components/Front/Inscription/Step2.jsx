@@ -37,7 +37,7 @@ const Step2 = ()=> {
                         transition={{type: "spring", stiffness: 400, damping: 10}}
                     >
                          <span>
-                            {data.type_id === UserType.ARTISTE && <i className="fa fa-check text-success me-2"></i>}
+                            {data.type_id === UserType.CROQUEUR && <i className="fa fa-check text-success me-2"></i>}
                          </span>
                         Je suis artiste / croqueur
                     </motion.div>
