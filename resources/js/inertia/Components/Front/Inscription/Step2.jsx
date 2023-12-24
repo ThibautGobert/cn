@@ -31,7 +31,7 @@ const Step2 = ()=> {
                 </div>
                 <div className="col-lg-4 col-md-12 d-grid my-2">
                     <motion.div
-                        onClick={() => setData('type_id', UserType.ARTISTE)}
+                        onClick={() => setData('type_id', UserType.CROQUEUR)}
                         className="btn btn-lg xl btn-secondary"
                         whileHover={{scale: 1.03}}
                         transition={{type: "spring", stiffness: 400, damping: 10}}
