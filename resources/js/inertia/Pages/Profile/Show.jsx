@@ -42,6 +42,7 @@ const Show = ({user})=> {
     }
 
     const  DisplayBreakLine = ({ text })=> {
+        if(!text)return
         const newText = text.split('\n').map((str, index, array) =>
             index === array.length - 1 ? <span key={index}>{str}</span> : <span key={index}>{str}<br/></span>
         );
