@@ -6,6 +6,7 @@ use App\Enums\GenreType;
 use App\Enums\PoseType;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use App\Services\ImageService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -65,6 +66,17 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
         */
         return redirect()->route('profile.show', $user)->withMessage(['type' => 'success', 'title' => 'Profil mis à jour avec succès !']);
+    }
+
+    public function updateAvatar(ProfileUpdateRequest $request, User $user)
+    {
+        //dd($request->all());
+        ImageService::upsertAvatar(
+            $user,
+            $request->input('image'),
+            $request->input('croppedAreaPixel')
+        );
+        return response()->json('ok');
     }
 
 

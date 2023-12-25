@@ -65,12 +65,6 @@ a {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-.edit-link {
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    font-size: 30px;
-}
 
 .e-appbar.e-primary {
     background: $primary;
@@ -374,6 +368,18 @@ input:checked + .slider:before {
     max-height: 300px;
     @media(max-width: 768px) {
         max-height: 150px;
+    }
+}
+.avatar-gear {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    font-size: 30px;
+    color: $primary;
+    transition: color 0.5s;
+    &:hover {
+        color: $secondary
     }
 }
 

@@ -11,6 +11,7 @@ use App\Http\Requests\Inscription\InscriptionStep4Request;
 use App\Http\Requests\Inscription\InscriptionStep5Request;
 use App\Models\Address;
 use App\Models\User;
+use App\Services\ImageService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -93,6 +94,12 @@ class InscriptionController extends Controller
 
     public function step6(Request $request, User $user)
     {
+        ImageService::upsertAvatar(
+            $user,
+            $request->input('image'),
+            $request->input('croppedAreaPixel')
+        );
+        /*
         $croppedAreaPixel = $request->input('croppedAreaPixel');
         $manager = new ImageManager(new Driver());
         $image = $manager->read($request->input('image'));
@@ -113,6 +120,7 @@ class InscriptionController extends Controller
             Storage::disk('public')->delete($user->avatar);
         }
         $user->update(['avatar' => '/storage'.$path]);
+        */
 
         return redirect()->route('inscription');
     }

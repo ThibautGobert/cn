@@ -38,9 +38,6 @@ const Show = ({user})=> {
 
     return <>
         <div className="container">
-            {auth.user && auth.user.id === user.id &&<Link href={route('profile.edit', user.id)} className="edit-link">
-                <i className="fa-solid fa-gear"></i>
-            </Link>}
             <div className="row">
                 <div className="col-lg-12 d-flex align-items-center position-relative">
                     <img className="avatar-lg border border-3 border-primary rounded-circle shadow" src={user.avatar} alt=""/>
@@ -74,6 +71,14 @@ const Show = ({user})=> {
             </div>
             <div className="row mt-3">
                 {Poses}
+            </div>
+            <div className="row mt-3">
+                <div className="col-md-12 text-end">
+                    {auth.user && auth.user.id === user.id &&<Link href={route('profile.edit', user.id)} className="btn btn-lg btn-primary me-2">
+                        <i className="fa-solid fa-gear me-2"></i>Modifier
+                    </Link>}
+
+                </div>
             </div>
         </div>
     </>

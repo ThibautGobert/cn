@@ -1,7 +1,7 @@
 import Cropper from "react-easy-crop";
 import {useEffect, useState} from "react";
 
-const ProfilePicture = ({user, onImageInfo})=> {
+const ProfilePictureCropper = ({user, onImageInfo})=> {
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [croppedArea, setCroppedArea] = useState(null)
     const [croppedAreaPixel, setCroppedAreaPixel] = useState(null)
@@ -88,4 +88,4 @@ const ProfilePicture = ({user, onImageInfo})=> {
         </>
     )
 }
-export default ProfilePicture
+export default ProfilePictureCropper
