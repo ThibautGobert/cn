@@ -16,7 +16,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'genre_type_id' => ['required'],
+           // 'genre_type_id' => ['required'],
         ];
     }
 }
