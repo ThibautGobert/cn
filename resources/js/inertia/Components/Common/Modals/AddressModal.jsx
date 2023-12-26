@@ -4,6 +4,7 @@ import {add} from "react-modal/lib/helpers/classList.js";
 import {useEffect, useState} from "react";
 import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 import * as UserTypeJs from '../../../../enums/UserType.js'
+import useToastHook from "@/inertia/Hooks/useToastHook.js";
 
 const AddressModal = ({auth, address, isOpen, onConfirmation, onDismiss})=> {
     const [data, setData] = useState({
@@ -21,7 +22,8 @@ const AddressModal = ({auth, address, isOpen, onConfirmation, onDismiss})=> {
     });
     const [errors, setErrors] = useState({})
     const [loading, setLoading] = useState(false)
-
+    const [toastMessage, setToastMessage] = useState(null)
+    useToastHook({message: toastMessage})
     useEffect(() => {
         if(address) {
             setData({...address, country_code: 'be'})
@@ -30,15 +32,21 @@ const AddressModal = ({auth, address, isOpen, onConfirmation, onDismiss})=> {
 
     const onClickConfirmation = async ()=> {
         setLoading(true)
-        await geocodeAddress(fullAddress())
         try {
-            await axios.post(route('address.upsert', {user: auth.user.id, address: address?.id}), data)
-            onConfirmation()
-        }catch (e) {
-            if(e.response?.data?.errors) {
-                setErrors(e.response.data.errors)
+            let {latitude, longitude} = await geocodeAddress(fullAddress())
+            try {
+                await axios.post(route('address.upsert', {user: auth.user.id, address: address?.id}), {...data, latitude: latitude, longitude: longitude})
+                onConfirmation()
+                setToastMessage({type: 'success', title: 'Adresse enregistrée avec succès !'})
+            }catch (e) {
+                if(e.response?.data?.errors) {
+                    setErrors(e.response.data.errors)
+                }
             }
+        }catch (e) {
+            setToastMessage({type: 'error', title: 'Adresse non trouvée'})
         }
+
         setLoading(false)
     }
 
@@ -55,7 +63,7 @@ const AddressModal = ({auth, address, isOpen, onConfirmation, onDismiss})=> {
                 let res = await axios.get(url);
                 if (res.data && res.data.length > 0) {
                     const { lat, lon } = res.data[0];
-                    setData(prevState => ({...prevState, latitude: lat, longitude: lon}))
+                    //setData(prevState => ({...prevState, latitude: lat, longitude: lon}))
                     resolve({ latitude: lat, longitude: lon });
                 } else {
                     return reject();
