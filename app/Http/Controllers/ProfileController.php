@@ -33,11 +33,9 @@ class ProfileController extends Controller
     public function edit(Request $request, User $user): Response
     {
         return Inertia::render('Profile/Edit', [
-            'user' => $user->load('main_address', 'poses')->append('type'),
+            'user' => $user->load('main_address', 'addresses', 'poses')->append('type'),
             'poseType' => PoseType::getAll(),
             'genreType' => GenreType::getAll()
-            //'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            //'status' => session('status'),
         ]);
     }
 
@@ -46,31 +44,20 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request, User $user): RedirectResponse
     {
-       // dd($request->all());
         $user->poses()->delete();
         $user->poses()->createMany(array_map(fn($poseId)=> ['pose_type_id' => $poseId], $request->input('poses')));
         $user->update([
             'genre_type_id' => $request->input('genre_type_id'),
             'about' => $request->input('about'),
-            'birthday' => $request->input('birthday')
+            'birthday' => $request->input('birthday'),
+            'distance_max' => $request->input('distance_max'),
         ]);
-        /*
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit');
-        */
         return redirect()->route('profile.show', $user)->withMessage(['type' => 'success', 'title' => 'Profil mis à jour avec succès !']);
     }
 
     public function updateAvatar(ProfileUpdateRequest $request, User $user)
     {
-        //dd($request->all());
         ImageService::upsertAvatar(
             $user,
             $request->input('image'),
@@ -83,6 +70,7 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
+    /*
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([
@@ -100,4 +88,5 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    */
 }

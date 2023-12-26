@@ -50,12 +50,12 @@ class HandleInertiaRequests extends Middleware
             ],
             [
                 'nodeText' => 'Connexion',
-                'url' =>  'login',
+                'url' =>  '/login',
                 'requireGuest' => true,
             ],
             [
                 'nodeText' => 'Inscription',
-                'url' =>  'inscription',
+                'url' =>  '/inscription',
                 'requireGuest' => true,
             ],
             [

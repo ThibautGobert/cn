@@ -33,6 +33,7 @@ Route::group(['middleware' => 'inertia'], function () {
     Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
     require_once __DIR__ . '/concepts/front/inscription.php';
     require_once __DIR__ . '/concepts/front/profile.php';
+    require_once __DIR__ . '/concepts/front/address.php';
 });
 /*
 Route::get('/', function () {

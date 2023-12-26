@@ -2,7 +2,6 @@ import Modal from 'react-modal'
 Modal.setAppElement('#app');
 
 const DeleteUserModal = ({user, isOpen, onConfirmation, onDismiss})=> {
-    console.log(user)
     const customStyles = {
         content: {
             top: '50%',

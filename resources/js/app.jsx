@@ -7,7 +7,8 @@ import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { registerLicense } from '@syncfusion/ej2-base';
-
+import Modal from "react-modal";
+Modal.defaultStyles.overlay.backgroundColor = ''
 
 registerLicense(import.meta.env.VITE_SYNCFUSION_LICENCE)
 createInertiaApp({

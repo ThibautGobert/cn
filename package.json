@@ -30,6 +30,7 @@
         "@syncfusion/ej2-react-inputs": "^24.1.41",
         "@syncfusion/ej2-react-navigations": "^23.2.5",
         "@syncfusion/ej2-react-notifications": "^23.2.5",
+        "@syncfusion/ej2-react-popups": "^24.1.41",
         "@vitejs/plugin-react": "^4.1.1",
         "bootstrap": "^5.3.2",
         "canvas-confetti": "^1.9.2",

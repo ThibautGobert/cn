@@ -1,14 +1,16 @@
 import {motion} from "framer-motion";
 
-const SubmitBtn = ({label = 'Enregistrer',
+const SubmitBtn = ({
+                       label = 'Enregistrer',
                        cssClass = 'btn btn-lg btn-primary',
                        processing = false,
                        disabled = false,
-    spinnerCssClass = 'fa-solid fa-fan fa-spin me-2',
-    iconCssClass = 'fa fa-check me-2'
+                       spinnerCssClass = 'fa-solid fa-fan fa-spin me-2',
+                       iconCssClass = 'fa fa-check me-2',
+                       clicked = null
 })=> {
     return <>
-        <button type="submit" disabled={processing || disabled} className={cssClass}>
+        <button onClick={()=> clicked ? clicked() : null} type="submit" disabled={processing || disabled} className={cssClass}>
             {processing ? <motion.i
                     className={spinnerCssClass}
                     initial={{ opacity: 0 }}
