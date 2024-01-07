@@ -171,6 +171,7 @@ input:checked + .slider:before {
     Menu front
  */
 .front-logo {
+    z-index: 100000;
     top:15px;
     position: fixed;
     left: 15px;
