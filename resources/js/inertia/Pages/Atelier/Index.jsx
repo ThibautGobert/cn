@@ -20,7 +20,7 @@ const Index = ()=> {
                 </div>}
                 {ateliers.map(a=> {
                     return <div key={a.id}>
-                        <div className="col-md-12">
+                        <div className="col-md-12 mb-3">
                             <div className="card">
                                 <div className="card-header">
                                     <h4>{a.title}</h4>
