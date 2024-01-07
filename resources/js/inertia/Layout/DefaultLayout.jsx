@@ -14,9 +14,10 @@ const DefaultLayout = ({auth, children})=> {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7 }}
             className="min-vh-100 d-flex flex-column">
+            <img src="/images/logo-75.png" alt="logo croquez nous" className="front-logo"/>
             <Menu></Menu>
             {/*<NavBar auth={auth}></NavBar>*/}
-            <div className="flex-grow-1 flex-column d-flex" style={{marginTop: '75px'}}>
+            <div className="flex-grow-1 flex-column d-flex" style={{marginTop: '100px'}}>
                 {children}
             </div>
         </motion.div>

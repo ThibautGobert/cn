@@ -34,6 +34,7 @@ Route::group(['middleware' => 'inertia'], function () {
     require_once __DIR__ . '/concepts/front/inscription.php';
     require_once __DIR__ . '/concepts/front/profile.php';
     require_once __DIR__ . '/concepts/front/address.php';
+    require_once __DIR__ . '/concepts/front/atelier.php';
 });
 /*
 Route::get('/', function () {

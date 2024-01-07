@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserType;
 use App\Services\TemplateService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -47,6 +48,11 @@ class HandleInertiaRequests extends Middleware
                 'nodeText' => 'Profil',
                 'url' =>  '/profile/'.auth()->user()?->id.'/show',
                 'requireAuth' => true,
+            ],
+            [
+                'nodeText' => 'Mes ateliers',
+                'url' =>  '/atelier',
+                'requireUserType' => [UserType::ATELIER->value, UserType::CROQUEUR->value, UserType::AUCUN->value],
             ],
             [
                 'nodeText' => 'Connexion',

@@ -12,7 +12,7 @@ import {motion} from "framer-motion";
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import AddressModal from "@/inertia/Components/Common/Modals/AddressModal.jsx";
 import Modal from "react-modal";
-Modal.setAppElement('#app');
+
 const Edit = ({user})=> {
     const auth = usePage().props.auth
     const poseType = usePage().props.poseType
@@ -219,8 +219,8 @@ const Edit = ({user})=> {
                                         <div className="col-lg-3 mb-3">
                                             <TooltipComponent position="TopCenter" content="La distance maximum, en Km, à laquelle vous pouvez vous déplacer." target="#info-distance-max" windowCollision={true}>
                                                 <label id="info-distance-max" htmlFor="distance_max" className="form-label">Déplacement (Km)
-                                                    <i  className="fa-solid fa-circle-question ms-2 text-primary"></i>
                                                 </label>
+                                                <i  className="fa-solid fa-circle-question ms-2 text-primary"></i>
                                             </TooltipComponent>
                                             <input type="number" step="0.1" name="distance_max" id="distance_max" className="form-control form-control-lg"
                                                    onInput={(e)=> setData('distance_max', e.target.value)}

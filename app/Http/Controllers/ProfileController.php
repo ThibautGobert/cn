@@ -23,8 +23,6 @@ class ProfileController extends Controller
             'user' => $user->load('main_address', 'poses')->append('type'),
             'poseType' => PoseType::getAll(),
             'genreType' => GenreType::getAll()
-            //'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            //'status' => session('status'),
         ]);
     }
     /**

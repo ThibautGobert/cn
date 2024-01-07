@@ -11,7 +11,6 @@ class AddressController extends Controller
 {
     public function upsert(UpserAddressRequest $request, User $user, ?Address $address = null)
     {
-        //dd($request->all());
         $main = $request->input('main');
         if($main) {
             Address::where('user_id', $user->id)->update(['main' => 0]);
@@ -30,7 +29,7 @@ class AddressController extends Controller
             ]);
             return response()->json('updated');
         }
-        Address::create([
+        $address = Address::create([
             'user_id' => $user->id,
             'latitude' => $request->input('latitude'),
             'longitude' => $request->input('longitude'),
@@ -42,6 +41,6 @@ class AddressController extends Controller
             'name' => $request->input('name') ?? '',
             'main' => $main
         ]);
-        return response()->json('created');
+        return response()->json(['address' => $address]);
     }
 }

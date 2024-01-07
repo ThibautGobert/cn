@@ -59,6 +59,9 @@ a {
     text-decoration: none;
     color: unset;
 }
+.clickable {
+    cursor: pointer;
+}
 .nav-logo {
     width: 75px;
 }
@@ -167,7 +170,12 @@ input:checked + .slider:before {
 /**
     Menu front
  */
-
+.front-logo {
+    top:15px;
+    position: fixed;
+    left: 15px;
+    width: 70px
+}
 .front-menu{
     top:15px;
     position: fixed;

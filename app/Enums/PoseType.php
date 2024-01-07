@@ -17,7 +17,7 @@ enum PoseType : int
     #[Description('Sculpture')]
     case SCULPTURE = 3;
 
-    #[Description('Performence')]
+    #[Description('Performance')]
     case PERFORMANCE = 4;
 
     #[Description('Photos')]

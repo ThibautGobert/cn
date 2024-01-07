@@ -6,9 +6,7 @@ class TemplateService
 {
     public static function getSideBarItems($items = []) : array
     {
-        //$user = auth()->user();
         $url = app('request')->path();
-        //if(!$user) return [];
         $result = [];
         foreach($items as $key => $item){
             $res = self::processItem($item, str_pad($key +1, 2, '0', STR_PAD_LEFT), $url);
@@ -25,6 +23,10 @@ class TemplateService
         }
         if(isset($item['requireGuest']) && $item['requireGuest']) {
             if(auth()->user())return null;
+        }
+        if(isset($item['requireUserType'])) {
+            if(!auth()->user())return null;
+            if(!in_array(auth()->user()->type_id, $item['requireUserType']))return null;
         }
         if(!self::checkPermission($item)) return null;
         $result = $item;

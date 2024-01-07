@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 import * as UserTypeJs from '../../../../enums/UserType.js'
 import useToastHook from "@/inertia/Hooks/useToastHook.js";
-
+Modal.setAppElement('#app');
 const AddressModal = ({auth, address, isOpen, onConfirmation, onDismiss})=> {
     const [data, setData] = useState({
         id: '',
@@ -35,8 +35,8 @@ const AddressModal = ({auth, address, isOpen, onConfirmation, onDismiss})=> {
         try {
             let {latitude, longitude} = await geocodeAddress(fullAddress())
             try {
-                await axios.post(route('address.upsert', {user: auth.user.id, address: address?.id}), {...data, latitude: latitude, longitude: longitude})
-                onConfirmation()
+                let res = await axios.post(route('address.upsert', {user: auth.user.id, address: address?.id}), {...data, latitude: latitude, longitude: longitude})
+                onConfirmation(res.data.address)
                 setToastMessage({type: 'success', title: 'Adresse enregistrée avec succès !'})
             }catch (e) {
                 if(e.response?.data?.errors) {

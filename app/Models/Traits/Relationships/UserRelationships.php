@@ -4,6 +4,7 @@ namespace App\Models\Traits\Relationships;
 
 use App\Enums\UserType;
 use App\Models\Address;
+use App\Models\Atelier;
 use App\Models\UserPose;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -24,5 +25,10 @@ trait UserRelationships
     public function poses(): HasMany
     {
         return $this->hasMany(UserPose::class, 'user_id', 'id');
+    }
+
+    public function ateliers(): HasMany
+    {
+        return $this->hasMany(Atelier::class)->orderBy('from', 'desc');
     }
 }
