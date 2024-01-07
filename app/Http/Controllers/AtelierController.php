@@ -40,6 +40,6 @@ class AtelierController extends Controller
             'description' => $request->input('description')
         ]);
 
-        return redirect()->route('atelier.create')->withMessage(['type' => 'success', 'content' => 'Atelier créé avec succès !']);
+        return redirect()->route('atelier.index')->withMessage(['type' => 'success', 'content' => 'Atelier créé avec succès !']);
     }
 }
