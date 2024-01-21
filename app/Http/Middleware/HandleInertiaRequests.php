@@ -65,8 +65,9 @@ class HandleInertiaRequests extends Middleware
                 'requireGuest' => true,
             ],
             [
-                'nodeText' => 'Agence',
-                'url' =>  '/agence',
+                'nodeText' => 'Abonnements',
+                'url' =>  '/abonnement',
+                'requireAuth' => true,
             ],
         ];
 

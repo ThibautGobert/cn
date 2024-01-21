@@ -79,7 +79,7 @@ const Show = ()=> {
                         />
                         <Marker position={[atelier.address.latitude, atelier.address.longitude]}>
                             <Popup>
-                                atelier
+                                {atelier.title}
                             </Popup>
                         </Marker>
                     </MapContainer>

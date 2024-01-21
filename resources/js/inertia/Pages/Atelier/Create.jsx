@@ -99,7 +99,7 @@ const Create = ({auth})=> {
                             value={data.pose_type_id}
                             onChange={e=>setData('pose_type_id', e.target.value)}
                         />
-                        <AddressModal auth={auth} isOpen={isAddressModalOpen} onDismiss={closeAddressModal} onConfirmation={(address)=>onAddressSaved(address)}></AddressModal>
+
                     </div>
                     <div className="col-lg-4 col-md-6 mb-3">
                         <label htmlFor="address_id" className="form-label">Adresse</label><i onClick={()=>setIsAddressModalOpen(true)} className="fa-solid fa-circle-plus clickable ms-2"></i>
@@ -124,6 +124,7 @@ const Create = ({auth})=> {
             </form>
 
         </div>
+        <AddressModal auth={auth} isOpen={isAddressModalOpen} onDismiss={closeAddressModal} onConfirmation={(address)=>onAddressSaved(address)}></AddressModal>
     </>
 }
 Create.layout = page =>  <DefaultLayout children={page} />
