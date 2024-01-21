@@ -1,14 +1,16 @@
 import Menu from "@/inertia/Components/Front/MenuCurved/Menu.jsx";
-import {usePage} from "@inertiajs/react";
+import {Head, usePage} from "@inertiajs/react";
 import useToastHook from "@/inertia/Hooks/useToastHook.js";
 import {motion} from "framer-motion";
 
 const DefaultLayout = ({auth, children})=> {
     const message = usePage().props.message
+    const title = usePage().props.title || ''
     const errors = usePage().props.errors
     useToastHook({message, errors})
 
-    return (
+    return <>
+        <Head title={title} />
         <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -21,6 +23,6 @@ const DefaultLayout = ({auth, children})=> {
                 {children}
             </div>
         </motion.div>
-    )
+    </>
 }
 export default DefaultLayout
