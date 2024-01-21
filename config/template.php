@@ -10,6 +10,13 @@ return [
                 'requireAuth' => true,
             ],
             [
+                'nodeText' => 'Ateliers',
+                'iconCss' => 'fa-solid fa-paintbrush',
+                'permissions' => null,
+                'conceptUrl' => 'atelier',
+                'url' => '/admin/atelier'
+            ],
+            [
                 'nodeText' => 'Outils',
                 'iconCss' => 'fa fa-tools',
                 'requireAuth' => true,

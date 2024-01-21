@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\Front\InscriptionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/inscription', [InscriptionController::class, 'show'])->name('inscription');

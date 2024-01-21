@@ -1,13 +1,9 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Front\PageController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +61,7 @@ Route::middleware('auth')->group(function () {
         require_once __DIR__.'/concepts/admin/dashboard.php';
         require_once __DIR__.'/concepts/admin/user.php';
         require_once __DIR__.'/concepts/admin/role.php';
+        require_once __DIR__.'/concepts/admin/atelier.php';
     });
 });
 

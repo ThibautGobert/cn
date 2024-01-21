@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Enums\CountryType;
 use App\Enums\PoseType;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Inscription\InscriptionStep1Request;
 use App\Http\Requests\Inscription\InscriptionStep2Request;
 use App\Http\Requests\Inscription\InscriptionStep3Request;
@@ -15,13 +16,8 @@ use App\Services\ImageService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
 
 class InscriptionController extends Controller
 {

@@ -2,9 +2,10 @@ import {ColumnDirective, ColumnsDirective, Filter, GridComponent, Group, Page, S
 import { DataManager, UrlAdaptor } from '@syncfusion/ej2-data';
 import {Link, usePage} from "@inertiajs/react";
 import {Inject} from "@syncfusion/ej2-react-navigations";
-import DeleteUserModal from "@/inertia/Components/Admin/User/Modal/DeleteUserModal.jsx";
+import DeleteUserModal from "@/inertia/Admin/User/Modal/DeleteUserModal.jsx";
 import {useState} from "react";
 import useToastHook from "@/inertia/Hooks/useToastHook.js";
+import useDateFormat from "@/inertia/Hooks/useDateFormat.js";
 
 
 const Grid = ()=> {
@@ -43,18 +44,23 @@ const Grid = ()=> {
             <img className="rounded rounded-circle avatar-sm" src={data.avatar} alt={data.full_name}></img>
         )
     }
+    const birthdayTemplate = (data) => {
+        return <div>
+            {data.birthday && useDateFormat(data.birthday, 'dd/MM/yyyy')}
+        </div>
+    }
 
     return <>
         <DeleteUserModal user={userToDelete} isOpen={!!userToDelete} onConfirmation={(user)=> deleteUser(user)} onDismiss={()=>setUserToDelete(false)}></DeleteUserModal>
         <GridComponent dataSource={data} allowPaging={true} pageSettings={pageSettings} allowSorting={true} allowFiltering={true} filterSettings={filterSettings}>
             <ColumnsDirective>
                 <ColumnDirective field='avatar' allowSorting={false} allowFiltering={false} headerText='Type' width='100' template={avatarTemplate}/>
-                <ColumnDirective field='type' headerText='Type' width='100'/>
-                <ColumnDirective field='lastname' headerText='Nom'  width='100' />
-                <ColumnDirective field='firstname' headerText='Prénom' width='100'/>
-                <ColumnDirective field='email' headerText='Email' width='100' />
-                <ColumnDirective field='birthday' headerText='Date de naissance' width='100'  />
-                <ColumnDirective field='actions' headerText='Actions' width='100' template={actionTemplate} allowFiltering={false} allowSorting={false} />
+                <ColumnDirective field='type' headerText='Type' />
+                <ColumnDirective field='lastname' headerText='Nom' />
+                <ColumnDirective field='firstname' headerText='Prénom' />
+                <ColumnDirective field='email' headerText='Email' />
+                <ColumnDirective field='birthday' headerText='Date de naissance' template={birthdayTemplate}  />
+                <ColumnDirective field='actions' headerText='Actions' template={actionTemplate} allowFiltering={false} allowSorting={false} />
             </ColumnsDirective>
             <Inject services={[Page, Sort, Filter, Group]}/>
         </GridComponent>

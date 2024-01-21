@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Enums\PoseType;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\Atelier\CreateAtelierRequest;
 use App\Http\Requests\Front\Atelier\ManageAtelierRequest;
 use App\Http\Requests\Front\Atelier\StoreAtelierRequest;
 use App\Models\Atelier;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -41,5 +43,12 @@ class AtelierController extends Controller
         ]);
 
         return redirect()->route('atelier.index')->withMessage(['type' => 'success', 'content' => 'Atelier créé avec succès !']);
+    }
+
+    public function show(Request $request, Atelier $atelier)
+    {
+        return Inertia::render('Atelier/Show', [
+            'atelier' => $atelier->load('address', 'user')->append('pose')
+        ]);
     }
 }
