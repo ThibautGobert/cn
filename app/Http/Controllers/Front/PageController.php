@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Atelier;
+use App\Repositories\AtelierRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,7 +12,9 @@ class PageController extends Controller
 {
     public function home(Request $request)
     {
-        //dd(UserType::getDescription(UserType::ATELIER->name));
+        $atelier = Atelier::find(1);
+        //$users = AtelierRepository::getUsersAround($atelier);
+        //dd($users);
         return Inertia::render('Home/Show', []);
     }
 

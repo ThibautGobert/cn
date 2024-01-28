@@ -95,28 +95,6 @@ class InscriptionController extends Controller
             $request->input('image'),
             $request->input('croppedAreaPixel')
         );
-        /*
-        $croppedAreaPixel = $request->input('croppedAreaPixel');
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($request->input('image'));
-
-        $image->crop(
-            $croppedAreaPixel['width'],
-            $croppedAreaPixel['height'],
-            $croppedAreaPixel['x'],
-            $croppedAreaPixel['y']
-        );
-
-        $image->resize(300, 300);
-        $image = $image->toJpeg(100);
-        $path = '/image/' . $user->id . '/avatar/' . Str::random(40) . '.jpg';
-        Storage::disk('public')->put($path, $image);
-
-        if (Storage::disk('public')->exists($user->avatar)) {
-            Storage::disk('public')->delete($user->avatar);
-        }
-        $user->update(['avatar' => '/storage'.$path]);
-        */
 
         return redirect()->route('inscription');
     }

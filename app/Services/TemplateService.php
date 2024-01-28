@@ -4,7 +4,7 @@ namespace App\Services;
 
 class TemplateService
 {
-    public static function getSideBarItems($items = []) : array
+    public static function getItems($items = []) : array
     {
         $url = app('request')->path();
         $result = [];

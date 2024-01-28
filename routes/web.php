@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('auth.facebook');
+
+Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
 Route::group(['middleware' => 'inertia'], function () {
     Route::get('/', [PageController::class, 'home'])->name('home');
     Route::get('/agence', [PageController::class, 'agence'])->name('agence');

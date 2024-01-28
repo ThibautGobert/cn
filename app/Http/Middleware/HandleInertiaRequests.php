@@ -81,8 +81,8 @@ class HandleInertiaRequests extends Middleware
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'sidebarItems' => $templateService::getSideBarItems(config('template.sideBar.items')),
-            'frontSidebarItems' => $templateService::getSideBarItems($sideBarFront),
+            'sidebarItems' => $templateService::getItems(config('template.sideBar.items')),
+            'frontSidebarItems' => $templateService::getItems($sideBarFront),
             'message' =>  fn () => $request->session()->get('message')
         ];
     }
