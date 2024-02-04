@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Atelier;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -43,5 +44,37 @@ class AtelierRepository
             )->setBindings([$atelier->id])
             ->havingRaw('distance_km <= users.distance_max')
             ->get();
+    }
+
+    public static function getUsersWithDistanceQuery(Atelier $atelier, ?int $userType = null): Builder
+    {
+        $query = User::query()
+            ->leftJoin('address as a', function ($join) {
+                $join->on('users.id', '=', 'a.user_id')
+                    ->where('a.main', '=', 1)
+                    ->whereNull('a.deleted_at');
+            })
+            ->join('ateliers as at', 'at.id', '=', DB::raw("?"))
+            ->join('address as at_address', 'at_address.id', '=', 'at.address_id')
+            ->selectRaw("
+                users.*,
+                (
+                ROUND(
+                    6371 * acos(cos(radians(a.latitude))
+                    * cos(radians(at_address.latitude))
+                    * cos(radians(at_address.longitude)
+                    - radians(a.longitude))
+                    + sin(radians(a.latitude))
+                    * sin(radians(at_address.latitude))),
+                    2)
+                ) AS distance_km"
+            )->setBindings([$atelier->id])
+            ->where('at.id', '!=', $atelier->user_id)
+            ->orderByRaw('ISNULL(distance_km) asc, distance_km asc');
+            //->havingRaw('distance_km <= users.distance_max')
+        if($userType) {
+            $query->where('users.type_id', '=', $userType);
+        }
+        return $query;
     }
 }

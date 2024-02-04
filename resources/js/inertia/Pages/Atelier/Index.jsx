@@ -11,6 +11,9 @@ const Index = ()=> {
                     <h3>Mes ateliers</h3>
                     <Link href={route('atelier.create')} className="btn btn-primary btn-lg"><i className="fa fa-plus"></i></Link>
                 </div>
+                <div className="col-md-12">
+                    <hr className="bg-secondary"/>
+                </div>
             </div>
             <div className="row">
                 {ateliers.length === 0 && <div>
@@ -22,8 +25,11 @@ const Index = ()=> {
                     return <div key={a.id}>
                         <div className="col-md-12 mb-3">
                             <div className="card">
-                                <div className="card-header">
+                                <div className="card-header d-flex justify-content-between">
                                     <h4>{a.title}</h4>
+                                    <Link className="btn btn-primary" href={route('atelier.proposition.index', a.id)}>
+                                        <i className="fa-solid fa-users"></i>
+                                    </Link>
                                 </div>
                                 <div className="card-body">
                                     <div className="row">
@@ -31,10 +37,10 @@ const Index = ()=> {
                                             Date : {useDateFormat(a.from, 'dd/MM/yyyy')}
                                         </div>
                                         <div className="col-lg-4 col-md-6">
-                                            De : {useDateFormat(a.from, "HH'h'ii")}
+                                            De : {useDateFormat(a.from, "HH'h'mm")}
                                         </div>
                                         <div className="col-lg-4 col-md-6">
-                                            À : {useDateFormat(a.to, "HH'h'ii")}
+                                            À : {useDateFormat(a.to, "HH'h'mm")}
                                         </div>
                                     </div>
                                     {a.description && <div className="row">

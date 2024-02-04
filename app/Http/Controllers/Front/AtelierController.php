@@ -51,4 +51,9 @@ class AtelierController extends Controller
             'atelier' => $atelier->load('address', 'user')->append('pose')
         ]);
     }
+
+    public function edit(Request $request, Atelier $atelier)
+    {
+        dd($atelier);
+    }
 }

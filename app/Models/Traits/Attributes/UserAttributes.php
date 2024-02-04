@@ -4,6 +4,7 @@ namespace App\Models\Traits\Attributes;
 
 use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Str;
 
 trait UserAttributes
 {
@@ -11,6 +12,13 @@ trait UserAttributes
     {
         return Attribute::make(
             get: fn()=> $this->firstname .' '. $this->lastname
+        );
+    }
+
+    public function limitedFullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn()=> $this->firstname .' '. Str::limit($this->lastname, 1, '.')
         );
     }
 

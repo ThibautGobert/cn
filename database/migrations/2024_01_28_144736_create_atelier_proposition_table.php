@@ -11,18 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_atelier', function (Blueprint $table) {
+        Schema::dropIfExists('user_atelier');
+        Schema::create('atelier_proposition', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('atelier_id');
-            $table->tinyInteger('statut_id');
+            $table->unsignedBigInteger('participant_id');
+            $table->unsignedInteger('participant_statut_id');
+            $table->unsignedInteger('owner_statut_id');
+            $table->dateTime('mail_sent_at')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
+            $table->foreign('participant_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('atelier_id')->references('id')->on('ateliers')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('atelier_id')->references('id')->on('ateliers')->onDelete('cascade');
         });
     }
 
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_atelier');
+        Schema::dropIfExists('atelier_proposition');
     }
 };

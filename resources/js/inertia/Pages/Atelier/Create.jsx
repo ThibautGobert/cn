@@ -44,8 +44,10 @@ const Create = ({auth})=> {
                 <div className="col-md-12 mb-3 d-flex justify-content-between align-items-center">
                     <h3>Créer un atelier</h3>
                 </div>
+                <div className="col-md-12">
+                    <hr className="bg-secondary"/>
+                </div>
             </div>
-
             <form id="atelier-form" onSubmit={submit}>
                 <div className="row">
                     <div className="col-md-12 mb-3">
@@ -76,7 +78,7 @@ const Create = ({auth})=> {
                             required
                             name="date"
                             id="date"
-                            className={"form-control form-control-lg " + (errors.date ? 'is-invalid' : '')}
+                            className={"form-control form-control-lg" + (errors.date ? 'is-invalid' : '')}
                             onInput={(e)=> setData('date', e.target.value)}/>
                         {errors.date && <div className="invalid-feedback">{errors.date}</div>}
                     </div>

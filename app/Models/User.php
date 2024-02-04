@@ -34,7 +34,8 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name'
+        'full_name',
+        'limited_full_name'
     ];
 
     /**
@@ -56,4 +57,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /*
+    public function sendPasswordResetNotification($token)
+    {
+
+    }
+    */
 }

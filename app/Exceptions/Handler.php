@@ -26,5 +26,13 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+        $this->renderable(function (UnloggedException $e, $request) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Non autorisé.'], 403);
+            }
+
+            // Rediriger vers la route de login si l'exception est une AuthorizationException
+            return redirect()->route('login')->withMessage(['type' => 'error', 'content' => 'Vous devez être connecté pour accéder à cette page']);
+        });
     }
 }

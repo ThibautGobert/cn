@@ -45,6 +45,10 @@ const Login = ()=> {
                                         </div>
                                         <div className="mb-2 text-center">
                                             <SubmitBtn label="Connexion" processing={processing} disabled={!data.email || !data.password}></SubmitBtn>
+                                            <div>
+                                                <Link href={route('password.request')}>Mot de passe oublié ?</Link>
+                                            </div>
+
                                         </div>
                                     </form>
                                     <hr/>
