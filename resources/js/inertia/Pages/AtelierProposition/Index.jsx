@@ -133,7 +133,7 @@ const Index = ()=> {
                                     <div className="row">
                                         <div className="col-md-12 text-end">
                                             <SubmitBtn
-                                                label="Envoyer une invitation"
+                                                label="Inviter"
                                                 clicked={()=>onSendProposition(u.id)}
                                                 processing={sending === u.id}
                                             ></SubmitBtn>
