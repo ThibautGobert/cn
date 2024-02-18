@@ -26,14 +26,13 @@ Route::group(['middleware' => 'inertia'], function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
-
-
     Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
     require_once __DIR__ . '/concepts/front/inscription.php';
     require_once __DIR__ . '/concepts/front/profile.php';
     require_once __DIR__ . '/concepts/front/address.php';
     require_once __DIR__ . '/concepts/front/atelier.php';
     require_once __DIR__ . '/concepts/front/abonnement.php';
+    require_once __DIR__.'/concepts/common/auth.php';
 });
 /*
 Route::get('/', function () {

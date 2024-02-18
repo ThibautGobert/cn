@@ -30,6 +30,7 @@ class AtelierPropositionController extends Controller
 
     public function send(ManageAtelierPropositionRequest $request, Atelier $atelier, User $user)
     {
+        $proposition = null;
         try {
             $proposition = AtelierProposition::create([
                 'atelier_id' => $atelier->id,
@@ -43,7 +44,9 @@ class AtelierPropositionController extends Controller
                 'propositions' => $atelier->propositions
             ]);
         }catch (\Exception $e) {
+            if($proposition)$proposition->delete();
             Log::error('Erreur lors de l\'envoi d\'une proposition d\'atelier', [
+                'proposition_deleted_id' => $proposition?->id,
                 'atelier_id' => $atelier->id,
                 'participant_id' => $user->id,
                 'erreur' => $e->getMessage(),
@@ -63,17 +66,37 @@ class AtelierPropositionController extends Controller
         ]);
     }
 
-    public function userConfirmation(
+    public function showUserConfirmation(
         AtelierPropositionConfirmationUserRequest $request,
         Atelier $atelier,
         AtelierProposition $proposition,
         User $user
     )
     {
+        $atelier->load('address', 'user');
+
         return Inertia::render('AtelierProposition/UserConfirmation', [
-            'atelier' => $atelier->load('address', 'user'),
+            'atelier' => $atelier,
             'proposition' => $proposition,
             'user' => $user->load('main_address')
         ]);
+    }
+
+    public function accept(Request $request, AtelierProposition $proposition)
+    {
+        $proposition->update([
+            'participant_statut_id' => StatutAtelierPropositionType::ACCEPTED
+        ]);
+
+        return response()->json(['proposition' => $proposition]);
+    }
+
+    public function refuse(Request $request, AtelierProposition $proposition)
+    {
+        $proposition->update([
+            'participant_statut_id' => StatutAtelierPropositionType::REFUSED
+        ]);
+
+        return response()->json(['proposition' => $proposition]);
     }
 }

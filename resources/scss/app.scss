@@ -55,6 +55,28 @@ html, body, #app {
 h1, h2, h3, h4, h5, h6 {
     margin: unset;
 }
+hr{
+    background-color: transparent;
+    border-top-style: solid;
+    border-color: #dee2e6;
+    border-top-width: 1px;
+    margin: 1.5rem 0;
+    &.md {
+        border-top-width: 4px;
+    }
+    &.primary {
+        border-color: $primary;
+    }
+    &.secondary {
+        border-color: $secondary;
+    }
+    &.dashed {
+        border-top-style: dashed;
+    }
+    &.dotted {
+        border-top-style: dotted;
+    }
+}
 a {
     text-decoration: none;
     color: unset;
@@ -469,3 +491,77 @@ input:checked + .slider:before {
     font-size: unset;
     font-weight: unset;
 }
+/* Style pour rendre les onglets défilables horizontalement */
+.scrollable-tabs {
+    border-bottom: none;
+    position: relative;
+    padding-bottom: 1px;
+    z-index: 0;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Permet un défilement fluide sur iOS */
+    flex-wrap: nowrap;
+    //scrollbar-width: none; /* Pour Firefox */
+    //-ms-overflow-style: none;  /* Pour Internet Explorer 10+ et Edge */
+    &::-webkit-scrollbar {
+        //display: none; /* Pour les navigateurs WebKit comme Chrome et Safari */
+    }
+    &::after {
+        content: ''; // Nécessaire pour que le pseudo-élément soit généré
+        flex-grow: 1; // Permet au pseudo-élément de remplir l'espace disponible
+        border-bottom: 1px solid #dee2e6;
+        position: absolute;
+        top: auto;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        z-index: -1;
+    }
+    .nav-item {
+        /* Empêche les onglets de passer à la ligne */
+        flex-shrink: 0;
+    }
+    ::-webkit-scrollbar {
+        display: none; /* Pour les navigateurs WebKit comme Chrome et Safari */
+    }
+
+    .nav-link {
+        position: relative;
+        z-index: 1000;
+        border-bottom: 1px solid #e9ecef;
+    }
+    /*
+    .nav-link.active {
+        position: relative;
+        background-color: white;
+        &:after {
+            content: '';
+            position: absolute;
+            z-index: 1000;
+            left: 0;
+            right: 0;
+            bottom: -5px; // Ajustez cette valeur en fonction de l'épaisseur de la bordure du nav-tabs// Ajustez en fonction de l'épaisseur de la bordure du nav-tabs
+            height: 10px; // Assurez-vous que cette hauteur est suffisante pour couvrir la bordure
+            background-color: blue;
+        }
+    }
+
+     */
+}
+
+#logged-as-container {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid $secondary;
+    margin-top: 50px;
+    padding: 50px;
+}
+

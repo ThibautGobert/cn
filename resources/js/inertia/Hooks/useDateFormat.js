@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 
-const useDateFormat = (date, dateFormat) => {
+const useDateFormat = (date, dateFormat = 'dd/MM/yyyy') => {
     return format(date, dateFormat);
 };
 

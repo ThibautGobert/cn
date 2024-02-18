@@ -5,6 +5,7 @@ import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
 import useToastHook from "@/inertia/Hooks/useToastHook.js";
 import useDateFormat from "@/inertia/Hooks/useDateFormat.js";
 import * as StatutAtelierPropositionTypeJs from '../../../enums/StatutAtelierPropositionType.js'
+import General from "@/inertia/Admin/User/Edit/General.jsx";
 
 const Index = ()=> {
     const atelier = usePage().props.atelier
@@ -96,7 +97,7 @@ const Index = ()=> {
                                     <div className="row">
                                         <div className="col-md-12 text-end">
                                             <SubmitBtn
-                                                label="Envoyer une invitation"
+                                                label="Inviter"
                                                 clicked={()=>onSendProposition(u.id)}
                                                 processing={sending === u.id}
                                             ></SubmitBtn>
@@ -340,56 +341,73 @@ const Index = ()=> {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h4>Invitations confirmées</h4>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h5>Modèles :</h5>
-                </div>
-            </div>
-            {confirmedModeles.length > 0 ? confirmedModeleRows : <div className="text-center">Aucune invitation de modèle confirmée</div>}
-            <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h5>Croqueurs :</h5>
-                </div>
-            </div>
-            {confirmedCroqueurs.length > 0 ? confirmedCroqueurRows : <div className="text-center">Aucune invitation de croqueur confirmée</div>}
-            <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h4>Invitations en attentes</h4>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h5>Modèles :</h5>
-                </div>
-            </div>
-            {sentModeles.length > 0 ? sentModeleRows : <div className="text-center">Aucune invitation de modèle en attente</div>}
-            <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h5>Croqueurs :</h5>
-                </div>
-            </div>
-            {sentCroqueurs.length > 0 ? sentCroqueurRows : <div className="text-center">Aucune invitation de croqueur en attente</div>}
-            <div className="row">
                 <div className="col-md-12">
-                    <h4>Inviter des participants</h4>
+                    <ul className="nav nav-tabs scrollable-tabs" id="user-tab" role="tablist">
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link active" id="create" data-bs-toggle="tab"
+                                    data-bs-target="#create-tab" type="button" role="tab" aria-controls="create" aria-selected="true">Inviter des membres
+                            </button>
+                        </li>
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="pending" data-bs-toggle="tab"
+                                    data-bs-target="#pending-tab" type="button" role="tab" aria-controls="pending">Invitations en attente<span className="badge bg-secondary ms-2">{sentModeles.length + sentCroqueurs.length}</span>
+                            </button>
+                        </li>
+                        <li className="nav-item" role="presentation">
+                            <button className="nav-link" id="confirmed" data-bs-toggle="tab"
+                                    data-bs-target="#confirmed-tab" type="button" role="tab" aria-controls="general" aria-selected="true">Invitations confirmées<span className="badge bg-secondary ms-2">{confirmedModeles.length + confirmedCroqueurs.length}</span>
+                            </button>
+                        </li>
+                    </ul>
+                    <div className="tab-content mt-3">
+                        <div className="tab-pane fade show active" id="create-tab" role="tabpanel" aria-labelledby="create">
+                            <div className="row">
+                                <div className="col-md-12 mb-2">
+                                    <h5>Modèles :</h5>
+                                </div>
+                            </div>
+                            {availableModeles.length > 0 ? availableModelesRows : <div className="text-center">Aucun modèle de disponible</div>}
+                            <hr className="md primary dashed"/>
+                            <div className="row mt-3">
+                                <div className="col-md-12 mb-2">
+                                    <h5>Croqueurs :</h5>
+                                </div>
+                            </div>
+                            {availableCroqueurs.length > 0 ? availableCroqueursRows : <div className="text-center">Aucun croqueur de disponible</div>}
+                        </div>
+                        <div className="tab-pane fade" id="pending-tab" role="tabpanel" aria-labelledby="pending">
+                            <div className="row">
+                                <div className="col-md-12 mb-2">
+                                    <h5>Modèles :</h5>
+                                </div>
+                            </div>
+                            {sentModeles.length > 0 ? sentModeleRows : <div className="text-center">Aucune invitation de modèle en attente</div>}
+                            <hr className="md primary dashed"/>
+                            <div className="row">
+                                <div className="col-md-12 mb-2">
+                                    <h5>Croqueurs :</h5>
+                                </div>
+                            </div>
+                            {sentCroqueurs.length > 0 ? sentCroqueurRows : <div className="text-center">Aucune invitation de croqueur en attente</div>}
+                        </div>
+                        <div className="tab-pane fade" id="confirmed-tab" role="tabpanel" aria-labelledby="confirmed">
+                            <div className="row">
+                                <div className="col-md-12 mb-2">
+                                    <h5>Modèles :</h5>
+                                </div>
+                            </div>
+                            {confirmedModeles.length > 0 ? confirmedModeleRows : <div className="text-center">Aucune invitation de modèle confirmée</div>}
+                            <hr className="md primary dashed"/>
+                            <div className="row">
+                                <div className="col-md-12 mb-2">
+                                    <h5>Croqueurs :</h5>
+                                </div>
+                            </div>
+                            {confirmedCroqueurs.length > 0 ? confirmedCroqueurRows : <div className="text-center">Aucune invitation de croqueur confirmée</div>}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-md-12 mb-2">
-                    <h5>Modèles :</h5>
-                </div>
-            </div>
-            {availableModeles.length > 0 ? availableModelesRows : <div className="text-center">Aucun modèle de disponible</div>}
-            <div className="row mt-3">
-                <div className="col-md-12 mb-2">
-                    <h5>Croqueurs :</h5>
-                </div>
-            </div>
-            {availableCroqueurs.length > 0 ? availableCroqueursRows : <div className="text-center">Aucun croqueur de disponible</div>}
         </div>
     </>
 }

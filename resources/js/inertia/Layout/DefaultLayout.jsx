@@ -2,6 +2,8 @@ import Menu from "@/inertia/Components/Front/MenuCurved/Menu.jsx";
 import {Head, Link, usePage} from "@inertiajs/react";
 import useToastHook from "@/inertia/Hooks/useToastHook.js";
 import {motion} from "framer-motion";
+import LoggedAsWarning from "@/inertia/Components/Common/Auth/LoggedAsWarning.jsx";
+import Footer from "@/inertia/Layout/Footer.jsx";
 
 const DefaultLayout = ({auth, children})=> {
     const message = usePage().props.message
@@ -23,6 +25,8 @@ const DefaultLayout = ({auth, children})=> {
             {/*<NavBar auth={auth}></NavBar>*/}
             <div className="flex-grow-1 flex-column d-flex" style={{marginTop: '100px'}}>
                 {children}
+                <LoggedAsWarning></LoggedAsWarning>
+                <Footer></Footer>
             </div>
         </motion.div>
     </>

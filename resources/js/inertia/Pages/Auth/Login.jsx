@@ -1,7 +1,8 @@
 import DefaultLayout from "@/inertia/Layout/DefaultLayout.jsx";
 import {motion} from "framer-motion";
-import {Link, useForm} from "@inertiajs/react";
+import {Link, router, useForm} from "@inertiajs/react";
 import SubmitBtn from "@/inertia/Components/Common/Form/SubmitBtn.jsx";
+import {useState} from "react";
 
 
 const Login = ()=> {
@@ -10,10 +11,19 @@ const Login = ()=> {
         password: '',
         remember: false,
     });
+
+    const [processingFacebook, setProcessingFacebook] = useState(false)
     const submit = (e) => {
         e.preventDefault();
         post(route('login'));
     };
+
+    const handleFacebookClick = ()=> {
+        setProcessingFacebook(true)
+        router.visit(route('auth.facebook'))
+    }
+
+
     return <div className="h-100 d-flex justify-content-center align-items-center flex-grow-1">
             <div className="row justify-content-center min-vw-100">
                 <div className="col-lg-4 col-md-12">
@@ -54,9 +64,16 @@ const Login = ()=> {
                                     <hr/>
                                     <h5 className="my-3 text-center">Connexion Facebook</h5>
                                     <div className="mb-2 text-center">
-                                        <Link className="btn btn-lg btn-secondary" href={route('auth.facebook')}>
+                                        <SubmitBtn
+                                            label="connexion via Facebook"
+                                            processing={processingFacebook}
+                                            cssClass="btn btn-lg btn-secondary"
+                                            iconCssClass="fa-brands fa-facebook me-2"
+                                            clicked={()=>handleFacebookClick()}
+                                        ></SubmitBtn>
+                                        {/*<Link className="btn btn-lg btn-secondary" href={route('auth.facebook')}>
                                             <i className="fa-brands fa-facebook me-2"></i>Connexion
-                                        </Link>
+                                        </Link>*/}
                                     </div>
                                 </div>
                             </div>

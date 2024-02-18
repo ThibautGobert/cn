@@ -83,7 +83,10 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarItems' => $templateService::getItems(config('template.sideBar.items')),
             'frontSidebarItems' => $templateService::getItems($sideBarFront),
-            'message' =>  fn () => $request->session()->get('message')
+            'message' =>  fn () => $request->session()->get('message'),
+            'loggedAs' => session()->get('logged_as'),
+            'mainUser' => session()->get('main_user')
+
         ];
     }
 
